@@ -1,0 +1,51 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutReport.cshtml";
+    ViewBag.Title = "电影课使用情况统计表";
+    Dictionary<int, string> dict = BoxOms.Dict.DYK.Get();
+}
+@model VM_BookUse_Index
+<style type="text/css">
+    .table th, .table td {
+        text-align: center;
+        vertical-align: middle !important;
+        border: 1px solid #ccc;
+        vertical-align: middle;
+        padding: 10px;
+    }
+</style>
+<div class="panel panel-default">
+    <div class="panel-heading">电影课使用情况统计表(全部)</div>
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="col-md-12">
+                <a id="export" class="btn btn-default" href="#">导出Excel</a>
+                <a class="btn btn-default" href="@Url.Action("DykArea", "RpReport")">查看区域</a>
+            </div>
+        </div>
+
+        <div class="datas">
+            <table class="table table-hover">
+                <tr>
+                    <th>教材</th>
+                    <th>浏览次数</th>
+                </tr>
+                @{
+                    foreach (var item in dict)
+                    {
+                        <tr>
+                            <td>@item.Value</td>
+                            <td>@BoxOms.Web.BLL.BookUseBLL.BackDykNum(item.Key)</td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+    </div>
+</div>
+<script src="@Url.Content("/Content/Tools/jquery/jquery-1.10.2.min.js")"></script>
+<script type="text/javascript">
+    $("#export").click(function () {
+        $(this).attr('href', '/RpReport/ExportDykData');
+    });
+</script>

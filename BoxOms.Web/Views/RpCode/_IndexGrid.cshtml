@@ -1,0 +1,46 @@
+﻿@model List<VM_RpCode_Index_Grid>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>激活码</th>
+            <th>有效期</th>
+            <th>授权人数</th>
+            <th>所属企业</th>
+            <th>所属地区</th>
+            <th>所属学校</th>
+            <th>是否激活</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@(item.Validity == null ? "无限期" : item.Validity + "个月")</td>
+                    <td>@(item.AuthUserCount == null ? "不限人数" : item.AuthUserCount.ToString())</td>
+                    <td>@item.EnteName</td>
+                    <td>@BoxOms.Web.BLL.Rp_Code.BackPrName(item.Id)</td>
+                    <td>@item.UseSchool</td>
+                    <td>@((item.ExpirTime != null && DateTime.Now > item.ExpirTime) ? "已过期" : (item.ActiveTime == null ? "否" : "是"))</td>
+                    <td>
+                        <a class="btn btn-default btn-sm" href="@Url.Action("Look", new { id = item.Id })" title="详情" data-toggle="modal" data-target="#myModal" data-backdrop="static"><i class="glyphicon glyphicon-eye-open"></i></a>
+
+                        @if (item.ActiveTime == null || (item.ExpirTime != null && DateTime.Now > item.ExpirTime))
+                        {
+                            <a class="btn btn-default btn-sm" href="@Url.Action("Edit", new { id = item.Id })" title="编辑" data-toggle="modal" data-target="#myModal" data-backdrop="static"><i class="glyphicon glyphicon-edit"></i></a>
+                            <button class="btn btn-default btn-sm btnDelete" type="button" title="删除" dataid="@item.Id"><i class="glyphicon glyphicon-trash"></i></button>
+                        }
+
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td class="nodata" colspan="8">目前没有任何数据</td></tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,207 @@
+﻿@{
+    Layout = null;
+    ViewBag.Enterprises = BoxOms.Web.BLL.Rp_Code.GetData();
+    ViewBag.Provs = BoxOms.Web.BLL.BoxGoodBLL.GetData();
+    ViewBag.Citys = Model == null || Model.Provinces == null ? new Dictionary<int, string>() : BoxOms.Web.BLL.BoxGoodBLL.GetData((int)Model.Provinces);
+    ViewBag.Areas = Model == null || Model.Cityss == null ? new Dictionary<int, string>() : BoxOms.Web.BLL.BoxGoodBLL.GetData((int)Model.Cityss);
+    Dictionary<int, string> dict_english = BoxOms.Dict.Edition.GetEnglish();
+    Dictionary<int, string> dict_math = BoxOms.Dict.Edition.GetMath();
+    Dictionary<int, string> dict_chinese = BoxOms.Dict.Edition.GetChinese();
+}
+
+@model VM_RpCode_Form
+
+@using (Ajax.BeginForm("Add", "RpCode", new AjaxOptions { HttpMethod = "Post", OnSuccess = "formSuccess(data)" }, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(m => m.Chinese)
+    @Html.HiddenFor(m => m.English)
+    @Html.HiddenFor(m => m.Math)
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">激活码新增</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Validity, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-9">
+                <div class="input-group">
+                    @Html.TextBoxFor(m => m.Validity, new { @class = "form-control", @placeholder = "不填表示无限期" })
+                    <span class="input-group-addon">个月</span>
+                </div>
+                @Html.ValidationMessageFor(m => m.Validity)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.AuthUserCount, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-9">
+                <div class="input-group">
+                    @Html.TextBoxFor(m => m.AuthUserCount, new { @class = "form-control", @placeholder = "不填表示不限人数" })
+                    <span class="input-group-addon">人</span>
+                </div>
+                @Html.ValidationMessageFor(m => m.AuthUserCount)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.EnteId, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-9">
+                @Html.DropDownListFor(m => m.EnteId, new SelectList(ViewBag.Enterprises, "key", "value"), "--请选择--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.EnteId)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Provinces, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-9">
+                @Html.DropDownListFor(m => m.Provinces, new SelectList(ViewBag.Provs, "key", "value"), "--请选择--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Provinces)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Cityss, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-9">
+                @Html.DropDownListFor(m => m.Cityss, new SelectList(ViewBag.Citys, "key", "value"), "--请选择--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Cityss)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Areass, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-9">
+                @Html.DropDownListFor(m => m.Areass, new SelectList(ViewBag.Areas, "key", "value"), "--请选择--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Areass)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.UseSchool, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-9">
+                @Html.TextBoxFor(m => m.UseSchool, new { @class = "form-control", @autocomplete = "off" })
+                @Html.ValidationMessageFor(m => m.UseSchool)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Remark, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-9">
+                @Html.TextAreaFor(m => m.Remark, 5, 5, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Remark)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">英语</label>
+            <div class="col-lg-10">
+                @foreach (var it in dict_english)
+                {
+                    <div class="col-md-4 sele">
+                        <input name="eng" type="checkbox" value="@it.Key" />@it.Value
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">数学</label>
+            <div class="col-lg-10">
+
+                @foreach (var it in dict_math)
+                {
+                    <div class="col-md-4 sele">
+                        <input name="mat" type="checkbox" value="@it.Key" />@it.Value
+                    </div>
+                }
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">语文</label>
+            <div class="col-lg-10">
+
+                @foreach (var it in dict_chinese)
+                {
+                    <div class="col-md-4 sele">
+                        <input name="chi" type="checkbox" value="@it.Key" />@it.Value
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">确定</button>
+    </div>
+}
+<script type="text/javascript">
+    $(function () {
+        $("#Provinces").change(function () {//加载城市
+            $("#Cityss").empty();
+            $("#Areass").empty();
+            $("<option></option>").val("").text("--请选择--").appendTo($("#Cityss"));
+            $("<option></option>").val("").text("--请选择--").appendTo($("#Areass"));
+
+            $.getJSON("/BoxRunStat/GetCitys", { pid: $("#Provinces").val() }, function (data) {
+                $.each(data, function (i, item) {
+                    $("<option></option>").val(item["Value"]).text(item["Text"]).appendTo($("#Cityss"));
+                });
+            });
+        });
+
+        $("#Cityss").change(function () {//加载区县
+            $("#Areass").empty();
+            $("<option></option>").val("").text("--请选择--").appendTo($("#Areass"));
+
+            $.getJSON("/BoxRunStat/GetAreas", { cid: $("#Cityss").val() }, function (data) {
+                $.each(data, function (i, item) {
+                    $("<option></option>").val(item["Value"]).text(item["Text"]).appendTo($("#Areass"));
+                });
+            });
+        });
+        $("input[name='eng']:checkbox").change(function () {
+            var _ids = $("#English").val();
+            if ($(this).is(':checked')) {
+                $("#English").val($(this).val() + "," + _ids)
+            } else {
+                var b = "";
+                var arr = new Array();
+                arr = _ids.split(',');
+                arr.splice($.inArray($(this).val(), arr), 1);//删除数组中指定的元素
+                for (var i = 0; i < arr.length; i++) {
+                    b = arr[i] + "," + b;
+                }
+                $("#English").val(b)
+            }
+        })
+        $("input[name='mat']:checkbox").change(function () {
+            var _ids = $("#Math").val();
+            if ($(this).is(':checked')) {
+                $("#Math").val($(this).val() + "," + _ids)
+            } else {
+                var b = "";
+                var arr = new Array();
+                arr = _ids.split(',');
+                arr.splice($.inArray($(this).val(), arr), 1);
+                for (var i = 0; i < arr.length; i++) {
+                    b = arr[i] + "," + b;
+                }
+                $("#Math").val(b)
+            }
+        })
+        $("input[name='chi']:checkbox").change(function () {
+            var _ids = $("#Chinese").val();
+            if ($(this).is(':checked')) {
+                $("#Chinese").val($(this).val() + "," + _ids)
+            } else {
+                var b = "";
+                var arr = new Array();
+                arr = _ids.split(',');
+                arr.splice($.inArray($(this).val(), arr), 1);
+                for (var i = 0; i < arr.length; i++) {
+                    b = arr[i] + "," + b;
+                }
+                $("#Chinese").val(b)
+            }
+        })
+
+        $("input[type='checkbox']").bind("click", function (event) {
+            event.stopPropagation();    //  阻止事件冒泡
+        });
+
+        $(".sele").click(function () {
+            $(this).find(':checkbox').click();
+        });
+    });
+</script>

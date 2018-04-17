@@ -1,0 +1,192 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutReport.cshtml";
+    ViewBag.Title = "云课堂使用情况统计表";
+    Dictionary<int, string> dict = BoxOms.Dict.Course.Get();
+    Dictionary<int, string> dict1 = BoxOms.Dict.Edition.Get();
+}
+@model VM_YktAll_Index
+<style type="text/css">
+    .table th, .table td {
+        text-align: center;
+        vertical-align: middle !important;
+        border: 1px solid #ccc;
+        vertical-align: middle;
+        padding: 10px;
+    }
+</style>
+<div class="panel panel-default">
+    <div class="panel-heading">云课堂使用情况统计表(全部)</div>
+    <div class="panel-body">
+        @using (Html.BeginForm("YktUse", "RpReport", FormMethod.Get, new { @class = "form-inline", id = "form1" }))
+            {
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="text" value="@(Model.SDate==null?"":Convert.ToDateTime(Model.SDate).ToString("yyyy-MM-dd"))" data-val="true" data-val-date="字段 SDate 必须是日期。" id="SDate" name="SDate" class="form-control" autocomplete="off" placeholder="请输入：起始日期" onfocus="WdatePicker({ maxDate: '#F{$dp.$D(\'EDate\')}' })" />
+                    -
+                    <input type="text" id="EDate" value="@(Model.SDate==null?"":Convert.ToDateTime(Model.EDate).ToString("yyyy-MM-dd"))" name="EDate" data-val="true" data-val-date="字段 EDate 必须是日期。" class="form-control" autocomplete="off" placeholder="请输入：结束日期" onfocus="WdatePicker({ minDate: '#F{$dp.$D(\'SDate\')}' })" />
+                    <button class="btn btn-default" type="button" onclick="search()">搜索</button>
+                    <a id="export" class="btn btn-default" href="#">导出Excel</a>
+                    <a class="btn btn-default" href="@Url.Action("YktArea", "RpReport")">查看区域</a>
+                </div>
+                <div class="col-md-12">
+
+                </div>
+            </div>
+        }
+        <div class="datas">
+            <table class="table table-hover">
+                @if (Model.grid.Chinese.Count != 0 || Model.grid.Math.Count != 0 || Model.grid.English.Count != 0)
+            {
+                int _engNum = 0;
+                int _matNum = 0;
+                int _chiNum = 0;
+                if (Model.grid.English.Count > 0)
+                {
+                    _engNum = Model.grid.English.Count;
+                }
+                if (Model.grid.Math.Count > 0)
+                {
+                    _matNum = Model.grid.Math.Count;
+                }
+                if (Model.grid.Chinese.Count > 0)
+                {
+                    _chiNum = Model.grid.Chinese.Count;
+                }
+                <tr>
+                    <th>学科</th>
+                    <th>版本</th>
+                    @for (int i = 0; i < dict.Count; i++)
+                {
+                        <th>
+                            @dict[i].ToString()
+                        </th>
+                    }
+                    <th>版本小计</th>
+                    <th>学科小计</th>
+                </tr>
+                    if (Model.grid.English.Count > 0)
+                    {
+                        for (int i = 0; i < Model.grid.English.Count; i++)
+                        {
+                            <tr>
+                                @if (i == 0)
+                                {
+                                    <td rowspan='@(_engNum)'>
+                                        英语
+                                    </td>
+                                }
+                                <td>
+                                    @BoxOms.Dict.Edition.GetVal(Convert.ToInt32(Model.grid.English[i]))
+                                </td>
+                                @for (int j = 0; j < dict.Count; j++)
+                                {
+                                    <td>
+                                        @BoxOms.Web.BLL.BookUseBLL.BackNumByYkt(3, Convert.ToInt32(Model.grid.English[i]), j)
+                                    </td>
+                                }
+                                <td>
+                                    @BoxOms.Web.BLL.BookUseBLL.BackNumTotalByYkt(3, Convert.ToInt32(Model.grid.English[i]))
+                                </td>
+                                @if (i == 0)
+                                {
+                                    <td rowspan='@(_engNum)'>
+                                        @BoxOms.Web.BLL.BookUseBLL.BackNumTotalByYkt(3)
+                                    </td>
+                                }
+                            </tr>
+
+                        }
+                    }
+                    if (Model.grid.Math.Count > 0)
+                    {
+                        for (int i = 0; i < Model.grid.Math.Count; i++)
+                        {
+                            <tr>
+                                @if (i == 0)
+                                {
+                                    <td rowspan='@(_matNum)'>
+                                        数学
+                                    </td>
+                                }
+                                <td>
+                                    @BoxOms.Dict.Edition.GetVal(Convert.ToInt32(Model.grid.Math[i]))
+                                </td>
+                                @for (int j = 0; j < dict.Count; j++)
+                                {
+                                    <td>
+                                        @BoxOms.Web.BLL.BookUseBLL.BackNumByYkt(2, Convert.ToInt32(Model.grid.Math[i]), j)
+                                    </td>
+                                }
+                                <td>
+                                    @BoxOms.Web.BLL.BookUseBLL.BackNumTotalByYkt(2, Convert.ToInt32(Model.grid.Math[i]))
+                                </td>
+                                @if (i == 0)
+                                {
+                                    <td rowspan='@(_matNum)'>
+                                        @BoxOms.Web.BLL.BookUseBLL.BackNumTotalByYkt(2)
+                                    </td>
+                                }
+                            </tr>
+
+                        }
+                    }
+                    if (Model.grid.Chinese.Count > 0)
+                    {
+                        for (int i = 0; i < Model.grid.Chinese.Count; i++)
+                        {
+                            <tr>
+                                @if (i == 0)
+                                {
+                                    <td rowspan='@(_chiNum)'>
+                                        语文
+                                    </td>
+                                }
+                                <td>
+                                    @BoxOms.Dict.Edition.GetVal(Convert.ToInt32(Model.grid.Chinese[i]))
+                                </td>
+                                @for (int j = 0; j < dict.Count; j++)
+                                {
+                                    <td>
+                                        @BoxOms.Web.BLL.BookUseBLL.BackNumByYkt(1, Convert.ToInt32(Model.grid.Chinese[i]), j)
+                                    </td>
+                                }
+                                <td>
+                                    @BoxOms.Web.BLL.BookUseBLL.BackNumTotalByYkt(1, Convert.ToInt32(Model.grid.Chinese[i]))
+                                </td>
+                                @if (i == 0)
+                                {
+                                    <td rowspan='@(_chiNum)'>
+                                        @BoxOms.Web.BLL.BookUseBLL.BackNumTotalByYkt(1)
+                                    </td>
+                                }
+                            </tr>
+
+                        }
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <th>学科</th>
+                        <th>版本</th>
+                        @for (int i = 0; i < dict.Count; i++)
+                {
+                            <th>
+                                @dict[i].ToString()
+                            </th>
+                        }
+                        <th>版本小计</th>
+                        <th>学科小计</th>
+                    </tr>
+                    <tr><td class="nodata" colspan="17">目前没有任何数据</td></tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+<script src="@Url.Content("/Content/Tools/jquery/jquery-1.10.2.min.js")"></script>
+<script type="text/javascript">
+    $("#export").click(function () {
+        $(this).attr('href', '/RpReport/ExportAllData?SDate=' + $("#SDate").val() + '&EDate=' + $("#EDate").val() + '');
+    });
+</script>

@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{30B1A1F6-D2E0-4183-8862-1554E231D278}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>mdt</RootNamespace>
+    <AssemblyName>mdt</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLL\Helper.cs" />
+    <Compile Include="Common\DESEncrypt.cs" />
+    <Compile Include="Common\JsonHelper.cs" />
+    <Compile Include="Common\LogManager.cs" />
+    <Compile Include="dict\Course.cs" />
+    <Compile Include="dict\Edition.cs" />
+    <Compile Include="dict\ResType.cs" />
+    <Compile Include="dict_textbook_resource.cs">
+      <DependentUpon>fz_basic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FilesModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FilesModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FilesModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FilesModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FilesModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fz_basic.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>fz_basic.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fz_basic.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>fz_basic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fz_basic.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>fz_basic.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="MetaDatabase.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MetaDatabase.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MetaDatabase.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MetaDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MetaDatabase.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MetaDatabase.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BookCatalogs.cs" />
+    <Compile Include="Model\BookRes.cs" />
+    <Compile Include="Model\Books.cs" />
+    <Compile Include="Model\Editions.cs" />
+    <Compile Include="Model\SE.cs" />
+    <Compile Include="Model\TextBoxDataJson.cs" />
+    <Compile Include="Model\Resources.cs" />
+    <Compile Include="Model\ResourceTypes.cs" />
+    <Compile Include="MODResource.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MODResource.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MODResource.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MODResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MODResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MODResource.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tb_Code_ListTable3.cs">
+      <DependentUpon>MetaDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_Code_TreeTable2.cs">
+      <DependentUpon>MetaDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_Files.cs">
+      <DependentUpon>FilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_Resource.cs">
+      <DependentUpon>MODResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_StandardBook.cs">
+      <DependentUpon>MetaDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_StandardCatalog.cs">
+      <DependentUpon>MetaDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_TextBook.cs">
+      <DependentUpon>MODResource.tt</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EntityDeploy Include="MetaDatabase.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MetaDatabase.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="fz_basic.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>fz_basic.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="FilesModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>FilesModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="FilesModel.edmx.diagram">
+      <DependentUpon>FilesModel.edmx</DependentUpon>
+    </None>
+    <None Include="fz_basic.edmx.diagram">
+      <DependentUpon>fz_basic.edmx</DependentUpon>
+    </None>
+    <None Include="MetaDatabase.edmx.diagram">
+      <DependentUpon>MetaDatabase.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="MODResource.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MODResource.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="MODResource.edmx.diagram">
+      <DependentUpon>MODResource.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\DirectoryName.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="bin\Debug\Edition.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="FilesModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FilesModel.edmx</DependentUpon>
+      <LastGenOutput>FilesModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="FilesModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FilesModel.edmx</DependentUpon>
+      <LastGenOutput>FilesModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="fz_basic.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>fz_basic.edmx</DependentUpon>
+      <LastGenOutput>fz_basic.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="fz_basic.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>fz_basic.edmx</DependentUpon>
+      <LastGenOutput>fz_basic.cs</LastGenOutput>
+    </Content>
+    <Content Include="Lib\Newtonsoft.Json.dll" />
+    <Content Include="MetaDatabase.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MetaDatabase.Context.cs</LastGenOutput>
+      <DependentUpon>MetaDatabase.edmx</DependentUpon>
+    </Content>
+    <Content Include="MetaDatabase.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MetaDatabase.edmx</DependentUpon>
+      <LastGenOutput>MetaDatabase.cs</LastGenOutput>
+    </Content>
+    <Content Include="MODResource.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MODResource.edmx</DependentUpon>
+      <LastGenOutput>MODResource.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="MODResource.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MODResource.edmx</DependentUpon>
+      <LastGenOutput>MODResource.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OMS.Common\OMS.Common.csproj">
+      <Project>{52ac54c0-ffc5-49a4-ae15-3037f96c203f}</Project>
+      <Name>OMS.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

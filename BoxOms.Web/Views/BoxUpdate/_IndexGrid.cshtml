@@ -1,0 +1,56 @@
+﻿@model List<VM_BoxUpdateSys_Index_Grid>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>版本号</th>
+            <th>更新包下载地址</th>
+            <th>测试责任人</th>
+            <th>更新原因</th>
+            <th>更新总数</th>
+            <th>发布状态</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+                var _v = "v" + item.VNumber.ToString("n");
+                <tr>
+                    <td>@_v</td>
+                    <td>@item.Name</td>
+                    <td>@item.Principal</td>
+                    <td>@item.Cause</td>
+                    <td><a href="@Url.Action("Detail", new { id = item.Id })" class="btn btn-default btn-sm" title="查看更新明细" data-toggle="modal" data-target="#myModal">@item.UpdateCount</a></td>
+                    <td>
+                        @if (item.IsPublish)
+                        {
+                            <span class="label label-success">已发布</span>
+                        }
+                        else
+                        {
+                            <span class="label label-danger">未发布</span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.IsPublish)
+                        {
+                            <button class="btn btn-default btn-sm btnPublishCancel" type="button" title="取消发布" dataid="@item.Id"><i class="glyphicon glyphicon-ban-circle"></i></button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-default btn-sm btnPublish" type="button" title="发布" dataid="@item.Id"><i class="glyphicon glyphicon-ok-circle"></i></button>
+                            <a class="btn btn-default btn-sm" href="@Url.Action("Edit", new { id = item.Id })" title="编辑"><i class="glyphicon glyphicon-edit"></i></a>
+                            <button class="btn btn-default btn-sm btnDelete" type="button" title="删除" dataid="@item.Id"><i class="glyphicon glyphicon-trash"></i></button>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td class="nodata" colspan="7">目前没有任何数据</td></tr>
+        }
+    </tbody>
+</table>

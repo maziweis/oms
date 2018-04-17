@@ -1,0 +1,94 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutReport.cshtml";
+    ViewBag.Title = "用户登录情况分析表";
+    ViewBag.Provs = BoxOms.Web.BLL.BoxGoodBLL.GetData();
+    ViewBag.Citys = Model == null || Model.UseProv == null ? new Dictionary<int, string>() : BoxOms.Web.BLL.BoxGoodBLL.GetData((int)Model.UseProv);
+    ViewBag.Areas = Model == null || Model.UseCity == null ? new Dictionary<int, string>() : BoxOms.Web.BLL.BoxGoodBLL.GetData((int)Model.UseCity);
+    ViewBag.SchoolNames = Model == null || Model.UseDist == null ? new Dictionary<string, string>() : BoxOms.Web.BLL.BookUseBLL.GetSchoolData(Convert.ToInt32(Model.UseDist));
+}
+@model VM_UserLogin_Index
+<div class="panel panel-default">
+    <div class="panel-heading">用户登录情况分析</div>
+    <div class="panel-body">
+        @using (Html.BeginForm("UserLoginInfo", "RpReport", FormMethod.Get, new { @class = "form-inline", id = "form1" }))
+            {
+            @Html.HiddenFor(m => m.Grid.Pager.PageIndex)
+            @Html.HiddenFor(m => m.Grid.Pager.PageSize)
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.DropDownListFor(m => m.UseProv, new SelectList(ViewBag.Provs, "key", "value"), "--请选择省份--", new { @class = "form-control", @onchange = "s1();search();" })
+                    @Html.DropDownListFor(m => m.UseCity, new SelectList(ViewBag.Citys, "key", "value"), "--请选择城市--", new { @class = "form-control", @onchange = "s2();search();" })
+                    @Html.DropDownListFor(m => m.UseDist, new SelectList(ViewBag.Areas, "key", "value"), "--请选择区域--", new { @class = "form-control", @onchange = "s3();search();" })
+                    @Html.DropDownListFor(m => m.keyid, new SelectList(ViewBag.SchoolNames, "key", "value"), "--请选择学校--", new { @class = "form-control", @onchange = "search();" })
+                    <a id="export" class="btn btn-default" href="#">导出Excel</a>
+                </div>
+            </div>
+        }
+        <div class="datas">
+            @Html.Partial("_UserLogIndexGrid", Model.Grid.Data)
+        </div>
+        @Html.Pager(Model.Grid.Pager)
+    </div>
+</div>
+<script src="@Url.Content("/Content/Tools/jquery/jquery-1.10.2.min.js")"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#UseProv").change(function () {//加载城市
+            $("#UseCity").empty();
+            $("#UseDist").empty();
+            $("#keyid").empty();
+            $("<option></option>").val("").text("--请选择城市--").appendTo($("#UseCity"));
+            $("<option></option>").val("").text("--请选择区域--").appendTo($("#UseDist"));
+            $("<option></option>").val("").text("--请选择学校--").appendTo($("#keyid"));
+
+            $.getJSON("/BoxRunStat/GetCitys", { pid: $("#UseProv").val() }, function (data) {
+                $.each(data, function (i, item) {
+                    $("<option></option>").val(item["Value"]).text(item["Text"]).appendTo($("#UseCity"));
+                });
+            });
+        });
+
+        $("#UseCity").change(function () {//加载区县
+            $("#UseDist").empty();
+            $("#keyid").empty();
+            $("<option></option>").val("").text("--请选择区域--").appendTo($("#UseDist"));
+            $("<option></option>").val("").text("--请选择学校--").appendTo($("#keyid"));
+
+            $.getJSON("/BoxRunStat/GetAreas", { cid: $("#UseCity").val() }, function (data) {
+                $.each(data, function (i, item) {
+                    $("<option></option>").val(item["Value"]).text(item["Text"]).appendTo($("#UseDist"));
+                });
+            });
+        });
+
+        $("#UseDist").change(function () {//加载学校
+            $("#keyid").empty();
+            $("<option></option>").val("").text("--请选择学校--").appendTo($("#keyid"));
+
+            $.getJSON("/RpReport/GetSchool", { aid: $("#UseDist").val() }, function (data) {
+                $.each(data, function (i, item) {
+                    $("<option></option>").val(item["Value"]).text(item["Text"]).appendTo($("#keyid"));
+                });
+            });
+        });
+
+        $("#export").click(function () {
+            $(this).attr('href', '/RpReport/ExportUserLoginData?UseProv=' + $("#UseProv").val() + '&UseCity=' + $("#UseCity").val() + '&UseDist=' + $("#UseDist").val() + '&keyid=' + $("#keyid").val() + '');
+        });
+    });
+    function s1() {
+        $("#UseCity").empty();
+        $("#UseDist").empty();
+        $("<option></option>").val("").text("--请选择--").appendTo($("#UseCity"));
+        $("<option></option>").val("").text("--请选择--").appendTo($("#UseDist"));
+    }
+
+    function s2() {
+        $("#UseDist").empty();
+        $("<option></option>").val("").text("--请选择--").appendTo($("#UseDist"));
+    }
+    function s3() {
+        $("#keyid").empty();
+        $("<option></option>").val("").text("--请选择--").appendTo($("#keyid"));
+    }
+</script>

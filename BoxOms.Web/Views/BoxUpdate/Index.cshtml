@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutTopLeft.cshtml";
+}
+
+@model VM_BoxUpdateSys_Index
+
+<div class="panel panel-default">
+    <div class="panel-heading">系统更新列表</div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Index", "BoxUpdate", FormMethod.Get, new { @class = "form-inline", id = "form1" }))
+        {
+            @Html.HiddenFor(m => m.Grid.Pager.PageIndex)
+            @Html.HiddenFor(m => m.Grid.Pager.PageSize)
+            <div class="row">
+                <div class="col-md-12">
+                    <a class="btn btn-default" href="@Url.Action("Add")" role="button">新增</a>
+                </div>
+            </div>
+        }
+        <div class="datas">
+            @Html.Partial("_IndexGrid", Model.Grid.Data)
+        </div>
+        @Html.Pager(Model.Grid.Pager)
+    </div>
+</div>
+
+@section Scripts {
+    <script src="@Url.Content("/Content/Js/BoxUpdate.js")"></script>
+}

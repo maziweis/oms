@@ -1,0 +1,38 @@
+﻿@model List<VM_UserLogin_Index_Grid>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>账号</th>
+            <th>所属企业</th>
+            <th>所属学校</th>
+            <th>姓名</th>
+            <th>用户角色</th>
+            <th>登录IP</th>
+            <th>IP归属地</th>
+            <th>登录次数</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.LoginAccount</td>
+                    <td>@item.LoginEnte</td>
+                    <td>@item.LoginSchool</td>
+                    <td>@item.LoginUserName</td>
+                    <td>@item.LoginRoleName</td>
+                    <td>@item.LoginIP</td>
+                    <td>@item.LoginDistName</td>
+                    <td>@item.count</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td class="nodata" colspan="8">目前没有任何数据</td></tr>
+        }
+    </tbody>
+</table>
+

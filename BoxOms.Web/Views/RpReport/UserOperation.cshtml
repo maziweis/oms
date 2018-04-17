@@ -1,0 +1,30 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutReport.cshtml";
+    ViewBag.Title = "用户使用情况分析表";
+}
+@model VM_UserOper_Index
+<div class="panel panel-default">
+    <div class="panel-heading">用户使用情况分析表</div>
+    <div class="panel-body">
+        @using (Html.BeginForm("UserOperation", "RpReport", FormMethod.Get, new { @class = "form-inline", id = "form1" }))
+            {
+            @Html.HiddenFor(m => m.Grid.Pager.PageIndex)
+            @Html.HiddenFor(m => m.Grid.Pager.PageSize)
+            <div class="row">
+                <div class="col-md-12">
+                    <a id="export" class="btn btn-default" href="#">导出Excel</a>
+                </div>
+            </div>
+        }
+        <div class="datas">
+            @Html.Partial("_UserOperationIndexGrid", Model.Grid.Data)
+        </div>
+        @Html.Pager(Model.Grid.Pager)
+    </div>
+</div>
+<script src="@Url.Content("/Content/Tools/jquery/jquery-1.10.2.min.js")"></script>
+<script type="text/javascript">
+    $("#export").click(function () {
+        $(this).attr('href', '/RpReport/ExportUserOperData');
+    });
+</script>

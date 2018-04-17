@@ -1,0 +1,20 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutTopLeft.cshtml";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">报表管理</div>
+    <div class="panel-body">
+        <a href="@Url.Action("UserLoginInfo")" target="_blank">用户登录情况分析表</a>
+        <br />
+        <a href="@Url.Action("UserLoginError")" target="_blank">用户登录异常统计表</a>
+        <br />
+        <a href="@Url.Action("UserOperation")" target="_blank">用户使用情况统计表</a>
+        <br />
+        <a href="@Url.Action("BookUse")" target="_blank">电子教材使用情况统计表</a>
+        <br />
+        <a href="@Url.Action("DykUse")" target="_blank">电影课使用情况统计表</a>
+        <br />
+        <a href="@Url.Action("YktUse")" target="_blank">云课堂使用情况统计表</a>
+    </div>
+</div>

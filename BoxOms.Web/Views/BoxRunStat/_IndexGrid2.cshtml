@@ -1,0 +1,57 @@
+﻿@model List<VM_BoxRunStat_Index2_Grid>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>学科</th>
+            <th>版本</th>
+            <th>数字教材</th>
+            <th>巩固练习</th>
+            <th>快乐天地</th>
+            <th>趣味游戏</th>
+            @*<th>f4</th>
+            <th>f5</th>
+            <th>f6</th>
+            <th>f7</th>
+            <th>f8</th>
+            <th>f9</th>
+            <th>f10</th>
+            <th>f11</th>
+            <th>f12</th>*@
+            <th>版本小计</th>
+            <th>学科小计</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+                string _subject = item.Subject == null ? "" : BoxOms.Dict.Subject.GetVal((int)item.Subject);
+                string _edition = item.Edition == null ? "" : BoxOms.Dict.Edition.GetVal((int)item.Edition);
+                <tr>
+                    <td>@_subject</td>
+                    <td>@_edition</td>
+                    <td>@item.f0</td>
+                    <td>@item.f1</td>
+                    <td>@item.f2</td>
+                    <td>@item.f3</td>
+                    @*<td>@item.f4</td>
+                    <td>@item.f5</td>
+                    <td>@item.f6</td>
+                    <td>@item.f7</td>
+                    <td>@item.f8</td>
+                    <td>@item.f9</td>
+                    <td>@item.f10</td>
+                    <td>@item.f11</td>
+                    <td>@item.f12</td>*@
+                    <td>@item.EditionTotal</td>
+                    <td>@item.SubjectTotal</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td class="nodata" colspan="17">目前没有任何数据</td></tr>
+        }
+    </tbody>
+</table>

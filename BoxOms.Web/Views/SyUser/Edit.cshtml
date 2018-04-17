@@ -1,0 +1,87 @@
+﻿@{
+    Layout = null;
+    ViewBag.States = BoxOms.Dict.State.Get();
+    List<BoxOms.Database.sys_role> _list = BoxOms.Web.BLL.SyRoleBLL.GetAllRole();
+    string[] _ids = null;
+    if (!string.IsNullOrEmpty(Model.ids))
+    {
+        _ids = Model.ids.Split(',');
+    }
+}
+
+@model VM_SyUser_Form
+
+@using (Ajax.BeginForm("Edit", "SyUser", new AjaxOptions { HttpMethod = "Post", OnSuccess = "formSuccess(data)" }, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.ids)
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">用户编辑</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Account, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-10">
+                @Html.TextBoxFor(m => m.Account, new { @class = "form-control", @autocomplete = "off" })
+                @Html.ValidationMessageFor(m => m.Account)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-10">
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @autocomplete = "off" })
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.State, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-10">
+                @Html.DropDownListFor(m => m.State, new SelectList(ViewBag.States, "key", "value"), new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ids, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-10">
+                @if (_list.Count > 0)
+                {
+                    foreach (var it in _list)
+                    {
+                        string _checked = string.Empty;
+                        if (_ids != null)
+                        {
+                            for (int i = 0; i < _ids.Length; i++)
+                            {
+                                if (_ids[i] == it.RoleId.ToString())
+                                {
+                                    _checked = "checked=checked";
+                                    break;
+                                }
+                            }
+                        }
+                        <input type="checkbox" value="@it.RoleId" @_checked />@it.RoleName<span>&nbsp;&nbsp;&nbsp;</span>
+
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">确定</button>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $("input:checkbox").change(function () {
+                var _ids = $("#ids").val();
+                if ($(this).is(':checked')) {
+                    $("#ids").val($(this).val() + "," + _ids)
+                } else {
+                    $("#ids").val(_ids.replace($(this).val() + ",", ""))
+                }
+
+            })
+        });
+    </script>
+
+}

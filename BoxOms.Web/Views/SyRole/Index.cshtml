@@ -1,0 +1,47 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutTopLeft.cshtml";
+    List<BoxOms.Database.sys_role> _list = (List<BoxOms.Database.sys_role>)ViewData["list"];
+}
+<div class="panel panel-default">
+    <div class="panel-heading">角色列表</div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <a class="btn btn-default" href="@Url.Action("Add")" role="button">新增</a>
+            </div>
+        </div>
+
+        <div class="datas">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>角色名称</th>
+                        <th>备注</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (_list.Count > 0)
+                    {
+                        foreach (var item in _list)
+                        {
+                            <tr>
+                                <td>@item.RoleId</td>
+                                <td>@item.RoleName</td>
+                                <td>@item.Remark</td>
+                                <td>
+                                    <a class="btn btn-default btn-sm" href="@Url.Action("Edit", new { id = item.RoleId })" title="编辑"><i class="glyphicon glyphicon-edit"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr><td class="nodata" colspan="4">目前没有任何数据</td></tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

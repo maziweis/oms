@@ -1,0 +1,104 @@
+﻿@{
+    Layout = null;
+}
+
+@model VM_BoxGood_Index_Grid
+@using (Ajax.BeginForm("Edit", "BoxGood", new AjaxOptions { HttpMethod = "Post", OnSuccess = "formSuccess(data)" }, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+{
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">查看详情</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label class="col-lg-2" style="font-weight:normal; text-align:right;">盒子编号：</label>
+            <span>@Model.id</span>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2" style="font-weight:normal; text-align:right;">版本号：</label>
+            <span>V @Model.SysVersion</span>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2" style="font-weight:normal; text-align:right;">MAC地址：</label>
+            <span>@Model.Mac</span>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2" style="font-weight:normal; text-align:right;">激活码：</label>
+            <span>@Model.ActivNumber</span>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2" style="font-weight:normal; text-align:right;">是否激活：</label>
+            @if (Model.IsActiv)
+            {
+                <span>是</span>
+            }
+            else
+            {
+                <span>否</span>
+            }
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2" style="font-weight:normal; text-align:right;">激活时间：</label>
+            <span>@Model.ActivTime</span>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2" style="font-weight:normal; text-align:right;">过期时间：</label>
+            <span>@(Model.ExpirTime == null ? "" : ((DateTime)Model.ExpirTime).ToString("yyyy-MM-dd"))</span>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2" style="font-weight:normal; text-align:right;">IP地址：</label>
+            <span>@Model.IP</span>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2" style="font-weight:normal; text-align:right;">备注：</label>
+            <span>@Model.Remark</span>
+        </div>
+        @{
+            if (!string.IsNullOrEmpty(ViewBag.Chinese))
+            {
+                string[] _ids = ViewBag.Chinese.ToString().Split(',');
+                <div class="form-group">
+                    <label class="col-lg-2" style="font-weight:normal; text-align:right;">语文：</label>
+                    <div class="col-lg-10" style="padding-left:0px;">
+                        @for (int i = 0; i < _ids.Length; i++)
+                    {
+                            <div style="width: 25%;float: left;">
+                                @_ids[i].ToString()
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            if (!string.IsNullOrEmpty(ViewBag.Math))
+            {
+                string[] _ids = ViewBag.Math.ToString().Split(',');
+                <div class="form-group">
+                    <label class="col-lg-2" style="font-weight:normal; text-align:right;">数学：</label>
+                    <div class="col-lg-10" style="padding-left:0px;">
+                        @for (int i = 0; i < _ids.Length; i++)
+                    {
+                            <div style="width: 25%;float: left;">
+                                @_ids[i].ToString()
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            if (!string.IsNullOrEmpty(ViewBag.English))
+            {
+                string[] _ids = ViewBag.English.ToString().Split(',');
+                <div class="form-group">
+                    <label class="col-lg-2" style="font-weight:normal; text-align:right;">英语：</label>
+                    <div class="col-lg-10" style="padding-left:0px;">
+                        @for (int i = 0; i < _ids.Length; i++)
+                    {
+                            <div style="width: 25%;float: left;">
+                                @_ids[i].ToString()
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        }
+    </div>
+            }

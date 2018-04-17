@@ -1,0 +1,36 @@
+﻿@{
+    Layout = null;
+}
+
+@model List<VM_BoxUpdateSys_Detail>
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">查看更新明细</h4>
+</div>
+<div class="modal-body">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>更新时间</th>
+                <th>更新机MAC地址</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.UTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        <td>@item.Mac</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td class="nodata" colspan="2">目前没有任何数据</td></tr>
+            }
+        </tbody>
+    </table>
+</div>

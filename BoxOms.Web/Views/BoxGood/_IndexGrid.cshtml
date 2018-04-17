@@ -1,0 +1,57 @@
+﻿@model List<VM_BoxGood_Index_Grid>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>盒子编号</th>
+            <th>MAC地址</th>
+            <th>激活码</th>
+            <th>激活时间</th>
+            <th>过期时间</th>
+            <th>IP</th>
+            <th>备注</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.id</td>
+                    <td>@item.Mac</td>
+                    <td class="look">
+                        <a href="#" val="@item.ActivNumber">查看</a>
+                    </td>
+                    <td>@item.ActivTime</td>
+                    <td>@(item.ExpirTime == null ? "" : ((DateTime)item.ExpirTime).ToString("yyyy-MM-dd"))</td>
+                    <td>
+                        @item.IP
+                    </td>
+                    <td>@item.Remark</td>
+                    <td>
+                        <a class="btn btn-default btn-sm" href="@Url.Action("Look", new { id = item.id })" title="详情" data-toggle="modal" data-target="#myModal" data-backdrop="static"><i class=" glyphicon glyphicon-eye-open"></i></a>
+                        <a class="btn btn-default btn-sm" href="@Url.Action("Edit", new { id = item.id })" title="编辑" data-toggle="modal" data-target="#myModal" data-backdrop="static"><i class="glyphicon glyphicon-edit"></i></a>
+                        <button class="btn btn-default btn-sm btnDelete" type="button" title="删除" dataid="@item.id"><i class="glyphicon glyphicon-trash"></i></button>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td class="nodata" colspan="7">目前没有任何数据</td></tr>
+        }
+    </tbody>
+</table>
+<script src="@Url.Content("/Content/Tools/jquery/jquery-1.10.2.min.js")"></script>
+<script>
+    $(function () {
+        $(".look a").click(function () {
+            if ($(this).text() == "查看") {
+                $(this).text($(this).attr("val"));
+            } else {
+                $(this).text("查看");
+            }
+        });
+    });
+</script>

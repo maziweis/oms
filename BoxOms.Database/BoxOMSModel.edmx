@@ -1,0 +1,1164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="box_omsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="box_good">
+          <Key>
+            <PropertyRef Name="BoxId" />
+          </Key>
+          <Property Name="BoxId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="100" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="Mac" Type="varchar" MaxLength="30" />
+          <Property Name="ActivNumber" Type="varchar" MaxLength="500" />
+          <Property Name="Edition" Type="int" />
+          <Property Name="SysVersion" Type="float" Nullable="false" />
+          <Property Name="Principal" Type="varchar" MaxLength="30" />
+          <Property Name="UpTime" Type="datetime" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="IsCanUpdate" Type="bit" Nullable="false" />
+          <Property Name="IsActiv" Type="bit" Nullable="false" />
+          <Property Name="Total" Type="int" Nullable="false" />
+          <Property Name="Prov" Type="varchar" MaxLength="100" />
+          <Property Name="City" Type="varchar" MaxLength="100" />
+          <Property Name="Area" Type="varchar" MaxLength="100" />
+          <Property Name="SchoolName" Type="varchar" MaxLength="100" />
+          <Property Name="IP" Type="varchar" MaxLength="100" />
+          <Property Name="FirstRunTime" Type="datetime" />
+          <Property Name="RunTime" Type="datetime" />
+          <Property Name="UseUserName" Type="varchar" MaxLength="20" />
+          <Property Name="Remark" Type="varchar" MaxLength="300" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="CreateUserId" Type="int" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="UpdateUserId" Type="int" />
+          <Property Name="ExpirTime" Type="datetime" />
+          <Property Name="Validity" Type="int" />
+        </EntityType>
+        <EntityType Name="box_good_online">
+          <Key>
+            <PropertyRef Name="BoxId" />
+          </Key>
+          <Property Name="BoxId" Type="int" Nullable="false" />
+          <Property Name="LastTime" Type="datetime" />
+          <Property Name="LastIp" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="box_resource_statist">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="BoxId" Type="int" Nullable="false" />
+          <Property Name="Mac" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="Subject" Type="int" />
+          <Property Name="Edition" Type="int" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="TypeName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="box_resource_statist_day">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="BoxId" Type="int" Nullable="false" />
+          <Property Name="Mac" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SDate" Type="datetime" Nullable="false" />
+          <Property Name="Subject" Type="int" />
+          <Property Name="Edition" Type="int" />
+          <Property Name="f0" Type="int" Nullable="false" />
+          <Property Name="f1" Type="int" Nullable="false" />
+          <Property Name="f2" Type="int" Nullable="false" />
+          <Property Name="f3" Type="int" Nullable="false" />
+          <Property Name="f4" Type="int" Nullable="false" />
+          <Property Name="f5" Type="int" Nullable="false" />
+          <Property Name="f6" Type="int" Nullable="false" />
+          <Property Name="f7" Type="int" Nullable="false" />
+          <Property Name="f8" Type="int" Nullable="false" />
+          <Property Name="f9" Type="int" Nullable="false" />
+          <Property Name="f10" Type="int" Nullable="false" />
+          <Property Name="f11" Type="int" Nullable="false" />
+          <Property Name="f12" Type="int" Nullable="false" />
+          <Property Name="EditionTotal" Type="int" Nullable="false" />
+          <Property Name="SubjectTotal" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="box_subject_edition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="BoxId" Type="int" Nullable="false" />
+          <Property Name="Subject" Type="int" Nullable="false" />
+          <Property Name="Edition" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="box_update_sys">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VNumber" Type="float" Nullable="false" />
+          <Property Name="PackUrl" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Principal" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cause" Type="varchar" MaxLength="3000" Nullable="false" />
+          <Property Name="IsPublish" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="box_update_sys_log">
+          <Key>
+            <PropertyRef Name="UpdateId" />
+            <PropertyRef Name="BoxId" />
+          </Key>
+          <Property Name="UpdateId" Type="int" Nullable="false" />
+          <Property Name="BoxId" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="FinishTime" Type="datetime" />
+          <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="oms_district">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="GUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CodeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Seq" Type="int" />
+          <Property Name="ParentID" Type="int" />
+          <Property Name="LevelCode" Type="int" />
+          <Property Name="IsEnd" Type="int" />
+          <Property Name="NeedShow" Type="int" />
+          <Property Name="Path" Type="nvarchar" MaxLength="300" />
+          <Property Name="CreateDateTime" Type="datetime" />
+          <Property Name="ModifyDateTime" Type="datetime" />
+          <Property Name="Deleted" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rp_cdkey">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="EntId" Type="int" />
+          <Property Name="UseProv" Type="int" />
+          <Property Name="UseCity" Type="int" />
+          <Property Name="UseDist" Type="int" />
+          <Property Name="UseSchool" Type="varchar" MaxLength="100" />
+          <Property Name="Validity" Type="int" />
+          <Property Name="ExpirTime" Type="datetime" />
+          <Property Name="AuthUserCount" Type="int" />
+          <Property Name="UseUser" Type="varchar" MaxLength="50" />
+          <Property Name="ActiveMac" Type="varchar" MaxLength="50" />
+          <Property Name="ActiveDisk" Type="varchar" MaxLength="50" />
+          <Property Name="ActiveTime" Type="datetime" />
+          <Property Name="ActiveIp" Type="varchar" MaxLength="30" />
+          <Property Name="ActiveCode" Type="varchar" MaxLength="300" />
+          <Property Name="Remark" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="rp_cdkey_and_edition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="CdKey" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="Subject" Type="int" Nullable="false" />
+          <Property Name="Edition" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rp_enterprise">
+          <Key>
+            <PropertyRef Name="EntId" />
+          </Key>
+          <Property Name="EntId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Remark" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="rp_log_login">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="LoginAccount" Type="varchar" MaxLength="50" />
+          <Property Name="LoginUserName" Type="varchar" MaxLength="50" />
+          <Property Name="LoginSchool" Type="varchar" MaxLength="100" />
+          <Property Name="LoginRoleName" Type="varchar" MaxLength="20" />
+          <Property Name="LoginEnte" Type="varchar" MaxLength="100" />
+          <Property Name="LoginDistName" Type="varchar" MaxLength="100" />
+          <Property Name="LoginKey" Type="varchar" MaxLength="36" />
+          <Property Name="LoginTime" Type="datetime" />
+          <Property Name="LoginIP" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="rp_resource_statist">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="Cd_key" Type="varchar" MaxLength="36" />
+          <Property Name="SubjectId" Type="int" />
+          <Property Name="EditionId" Type="int" />
+          <Property Name="EditionName" Type="varchar" MaxLength="30" />
+          <Property Name="Type" Type="int" />
+          <Property Name="ResourceType" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UserName" Type="varchar" MaxLength="30" />
+          <Property Name="RoleName" Type="varchar" MaxLength="30" />
+          <Property Name="SchoolName" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="sys_role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Remark" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="sys_role_and_auth">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="LeftId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sys_user">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Account" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sys_user_and_role">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BOX_GOODONLINE_REFERENCE_BOX_GOOD">
+          <End Role="box_good" Type="Self.box_good" Multiplicity="1" />
+          <End Role="box_good_online" Type="Self.box_good_online" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="box_good">
+              <PropertyRef Name="BoxId" />
+            </Principal>
+            <Dependent Role="box_good_online">
+              <PropertyRef Name="BoxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BOX_SUBJ_REFERENCE_BOX_GOOD">
+          <End Role="box_good" Type="Self.box_good" Multiplicity="1" />
+          <End Role="box_subject_edition" Type="Self.box_subject_edition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="box_good">
+              <PropertyRef Name="BoxId" />
+            </Principal>
+            <Dependent Role="box_subject_edition">
+              <PropertyRef Name="BoxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BOX_UPDATESYSLOG_REFERENCE_BOX_GOOD">
+          <End Role="box_good" Type="Self.box_good" Multiplicity="1" />
+          <End Role="box_update_sys_log" Type="Self.box_update_sys_log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="box_good">
+              <PropertyRef Name="BoxId" />
+            </Principal>
+            <Dependent Role="box_update_sys_log">
+              <PropertyRef Name="BoxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CDKEYANDEDITION_REFERENCE_CDKEY">
+          <End Role="rp_cdkey" Type="Self.rp_cdkey" Multiplicity="1" />
+          <End Role="rp_cdkey_and_edition" Type="Self.rp_cdkey_and_edition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rp_cdkey">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="rp_cdkey_and_edition">
+              <PropertyRef Name="CdKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OMS_BOX_UPDATESYS_REFERENCE_OMS_BOX_UPDATESYSLOG">
+          <End Role="box_update_sys" Type="Self.box_update_sys" Multiplicity="1" />
+          <End Role="box_update_sys_log" Type="Self.box_update_sys_log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="box_update_sys">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="box_update_sys_log">
+              <PropertyRef Name="UpdateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RP_CDKEY_REFERENCE_RP_ENTER">
+          <End Role="rp_enterprise" Type="Self.rp_enterprise" Multiplicity="0..1" />
+          <End Role="rp_cdkey" Type="Self.rp_cdkey" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rp_enterprise">
+              <PropertyRef Name="EntId" />
+            </Principal>
+            <Dependent Role="rp_cdkey">
+              <PropertyRef Name="EntId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RP_LOG_L_REFERENCE_RP_CDKEY">
+          <End Role="rp_cdkey" Type="Self.rp_cdkey" Multiplicity="0..1" />
+          <End Role="rp_log_login" Type="Self.rp_log_login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rp_cdkey">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="rp_log_login">
+              <PropertyRef Name="LoginKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RP_RESOU_REFERENCE_RP_CDKEY">
+          <End Role="rp_cdkey" Type="Self.rp_cdkey" Multiplicity="0..1" />
+          <End Role="rp_resource_statist" Type="Self.rp_resource_statist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rp_cdkey">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="rp_resource_statist">
+              <PropertyRef Name="Cd_key" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SYS_ROLE_AND_AUTH_REFERENCE_SYS_ROLE">
+          <End Role="sys_role" Type="Self.sys_role" Multiplicity="1" />
+          <End Role="sys_role_and_auth" Type="Self.sys_role_and_auth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sys_role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="sys_role_and_auth">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SYS_USER_AND_ROLE_REFERENCE_SYS_ROLE">
+          <End Role="sys_role" Type="Self.sys_role" Multiplicity="1" />
+          <End Role="sys_user_and_role" Type="Self.sys_user_and_role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sys_role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="sys_user_and_role">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SYS_USER_AND_ROLE_REFERENCE_SYS_USER">
+          <End Role="sys_user" Type="Self.sys_user" Multiplicity="1" />
+          <End Role="sys_user_and_role" Type="Self.sys_user_and_role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sys_user">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="sys_user_and_role">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="box_omsModelStoreContainer">
+          <EntitySet Name="box_good" EntityType="Self.box_good" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="box_good_online" EntityType="Self.box_good_online" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="box_resource_statist" EntityType="Self.box_resource_statist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="box_resource_statist_day" EntityType="Self.box_resource_statist_day" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="box_subject_edition" EntityType="Self.box_subject_edition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="box_update_sys" EntityType="Self.box_update_sys" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="box_update_sys_log" EntityType="Self.box_update_sys_log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="oms_district" EntityType="Self.oms_district" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rp_cdkey" EntityType="Self.rp_cdkey" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rp_cdkey_and_edition" EntityType="Self.rp_cdkey_and_edition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rp_enterprise" EntityType="Self.rp_enterprise" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rp_log_login" EntityType="Self.rp_log_login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rp_resource_statist" EntityType="Self.rp_resource_statist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sys_role" EntityType="Self.sys_role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sys_role_and_auth" EntityType="Self.sys_role_and_auth" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sys_user" EntityType="Self.sys_user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sys_user_and_role" EntityType="Self.sys_user_and_role" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BOX_GOODONLINE_REFERENCE_BOX_GOOD" Association="Self.FK_BOX_GOODONLINE_REFERENCE_BOX_GOOD">
+            <End Role="box_good" EntitySet="box_good" />
+            <End Role="box_good_online" EntitySet="box_good_online" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BOX_SUBJ_REFERENCE_BOX_GOOD" Association="Self.FK_BOX_SUBJ_REFERENCE_BOX_GOOD">
+            <End Role="box_good" EntitySet="box_good" />
+            <End Role="box_subject_edition" EntitySet="box_subject_edition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BOX_UPDATESYSLOG_REFERENCE_BOX_GOOD" Association="Self.FK_BOX_UPDATESYSLOG_REFERENCE_BOX_GOOD">
+            <End Role="box_good" EntitySet="box_good" />
+            <End Role="box_update_sys_log" EntitySet="box_update_sys_log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CDKEYANDEDITION_REFERENCE_CDKEY" Association="Self.FK_CDKEYANDEDITION_REFERENCE_CDKEY">
+            <End Role="rp_cdkey" EntitySet="rp_cdkey" />
+            <End Role="rp_cdkey_and_edition" EntitySet="rp_cdkey_and_edition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OMS_BOX_UPDATESYS_REFERENCE_OMS_BOX_UPDATESYSLOG" Association="Self.FK_OMS_BOX_UPDATESYS_REFERENCE_OMS_BOX_UPDATESYSLOG">
+            <End Role="box_update_sys" EntitySet="box_update_sys" />
+            <End Role="box_update_sys_log" EntitySet="box_update_sys_log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RP_CDKEY_REFERENCE_RP_ENTER" Association="Self.FK_RP_CDKEY_REFERENCE_RP_ENTER">
+            <End Role="rp_enterprise" EntitySet="rp_enterprise" />
+            <End Role="rp_cdkey" EntitySet="rp_cdkey" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RP_LOG_L_REFERENCE_RP_CDKEY" Association="Self.FK_RP_LOG_L_REFERENCE_RP_CDKEY">
+            <End Role="rp_cdkey" EntitySet="rp_cdkey" />
+            <End Role="rp_log_login" EntitySet="rp_log_login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RP_RESOU_REFERENCE_RP_CDKEY" Association="Self.FK_RP_RESOU_REFERENCE_RP_CDKEY">
+            <End Role="rp_cdkey" EntitySet="rp_cdkey" />
+            <End Role="rp_resource_statist" EntitySet="rp_resource_statist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SYS_ROLE_AND_AUTH_REFERENCE_SYS_ROLE" Association="Self.FK_SYS_ROLE_AND_AUTH_REFERENCE_SYS_ROLE">
+            <End Role="sys_role" EntitySet="sys_role" />
+            <End Role="sys_role_and_auth" EntitySet="sys_role_and_auth" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SYS_USER_AND_ROLE_REFERENCE_SYS_ROLE" Association="Self.FK_SYS_USER_AND_ROLE_REFERENCE_SYS_ROLE">
+            <End Role="sys_role" EntitySet="sys_role" />
+            <End Role="sys_user_and_role" EntitySet="sys_user_and_role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SYS_USER_AND_ROLE_REFERENCE_SYS_USER" Association="Self.FK_SYS_USER_AND_ROLE_REFERENCE_SYS_USER">
+            <End Role="sys_user" EntitySet="sys_user" />
+            <End Role="sys_user_and_role" EntitySet="sys_user_and_role" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="box_omsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="box_omsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="box_good" EntityType="box_omsModel.box_good" />
+          <EntitySet Name="box_good_online" EntityType="box_omsModel.box_good_online" />
+          <EntitySet Name="box_resource_statist" EntityType="box_omsModel.box_resource_statist" />
+          <EntitySet Name="box_resource_statist_day" EntityType="box_omsModel.box_resource_statist_day" />
+          <EntitySet Name="box_subject_edition" EntityType="box_omsModel.box_subject_edition" />
+          <EntitySet Name="box_update_sys" EntityType="box_omsModel.box_update_sys" />
+          <EntitySet Name="box_update_sys_log" EntityType="box_omsModel.box_update_sys_log" />
+          <EntitySet Name="oms_district" EntityType="box_omsModel.oms_district" />
+          <EntitySet Name="rp_cdkey" EntityType="box_omsModel.rp_cdkey" />
+          <EntitySet Name="rp_cdkey_and_edition" EntityType="box_omsModel.rp_cdkey_and_edition" />
+          <EntitySet Name="rp_enterprise" EntityType="box_omsModel.rp_enterprise" />
+          <EntitySet Name="rp_log_login" EntityType="box_omsModel.rp_log_login" />
+          <EntitySet Name="sys_role" EntityType="box_omsModel.sys_role" />
+          <EntitySet Name="sys_role_and_auth" EntityType="box_omsModel.sys_role_and_auth" />
+          <EntitySet Name="sys_user" EntityType="box_omsModel.sys_user" />
+          <EntitySet Name="sys_user_and_role" EntityType="box_omsModel.sys_user_and_role" />
+          <AssociationSet Name="FK_BOX_GOODONLINE_REFERENCE_BOX_GOOD" Association="box_omsModel.FK_BOX_GOODONLINE_REFERENCE_BOX_GOOD">
+            <End Role="box_good" EntitySet="box_good" />
+            <End Role="box_good_online" EntitySet="box_good_online" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BOX_SUBJ_REFERENCE_BOX_GOOD" Association="box_omsModel.FK_BOX_SUBJ_REFERENCE_BOX_GOOD">
+            <End Role="box_good" EntitySet="box_good" />
+            <End Role="box_subject_edition" EntitySet="box_subject_edition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BOX_UPDATESYSLOG_REFERENCE_BOX_GOOD" Association="box_omsModel.FK_BOX_UPDATESYSLOG_REFERENCE_BOX_GOOD">
+            <End Role="box_good" EntitySet="box_good" />
+            <End Role="box_update_sys_log" EntitySet="box_update_sys_log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OMS_BOX_UPDATESYS_REFERENCE_OMS_BOX_UPDATESYSLOG" Association="box_omsModel.FK_OMS_BOX_UPDATESYS_REFERENCE_OMS_BOX_UPDATESYSLOG">
+            <End Role="box_update_sys" EntitySet="box_update_sys" />
+            <End Role="box_update_sys_log" EntitySet="box_update_sys_log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CDKEYANDEDITION_REFERENCE_CDKEY" Association="box_omsModel.FK_CDKEYANDEDITION_REFERENCE_CDKEY">
+            <End Role="rp_cdkey" EntitySet="rp_cdkey" />
+            <End Role="rp_cdkey_and_edition" EntitySet="rp_cdkey_and_edition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RP_CDKEY_REFERENCE_RP_ENTER" Association="box_omsModel.FK_RP_CDKEY_REFERENCE_RP_ENTER">
+            <End Role="rp_enterprise" EntitySet="rp_enterprise" />
+            <End Role="rp_cdkey" EntitySet="rp_cdkey" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SYS_ROLE_AND_AUTH_REFERENCE_SYS_ROLE" Association="box_omsModel.FK_SYS_ROLE_AND_AUTH_REFERENCE_SYS_ROLE">
+            <End Role="sys_role" EntitySet="sys_role" />
+            <End Role="sys_role_and_auth" EntitySet="sys_role_and_auth" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SYS_USER_AND_ROLE_REFERENCE_SYS_ROLE" Association="box_omsModel.FK_SYS_USER_AND_ROLE_REFERENCE_SYS_ROLE">
+            <End Role="sys_role" EntitySet="sys_role" />
+            <End Role="sys_user_and_role" EntitySet="sys_user_and_role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SYS_USER_AND_ROLE_REFERENCE_SYS_USER" Association="box_omsModel.FK_SYS_USER_AND_ROLE_REFERENCE_SYS_USER">
+            <End Role="sys_user" EntitySet="sys_user" />
+            <End Role="sys_user_and_role" EntitySet="sys_user_and_role" />
+          </AssociationSet>
+          <EntitySet Name="rp_resource_statist" EntityType="box_omsModel.rp_resource_statist" />
+          <AssociationSet Name="FK_RP_RESOU_REFERENCE_RP_CDKEY" Association="box_omsModel.FK_RP_RESOU_REFERENCE_RP_CDKEY">
+            <End Role="rp_cdkey" EntitySet="rp_cdkey" />
+            <End Role="rp_resource_statist" EntitySet="rp_resource_statist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RP_LOG_L_REFERENCE_RP_CDKEY" Association="box_omsModel.FK_RP_LOG_L_REFERENCE_RP_CDKEY">
+            <End Role="rp_cdkey" EntitySet="rp_cdkey" />
+            <End Role="rp_log_login" EntitySet="rp_log_login" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="box_good">
+          <Key>
+            <PropertyRef Name="BoxId" />
+          </Key>
+          <Property Name="BoxId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Mac" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ActivNumber" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Edition" Type="Int32" />
+          <Property Name="SysVersion" Type="Double" Nullable="false" />
+          <Property Name="Principal" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="UpTime" Type="DateTime" Precision="3" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="IsCanUpdate" Type="Boolean" Nullable="false" />
+          <Property Name="IsActiv" Type="Boolean" Nullable="false" />
+          <Property Name="Total" Type="Int32" Nullable="false" />
+          <Property Name="Prov" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Area" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SchoolName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IP" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FirstRunTime" Type="DateTime" Precision="3" />
+          <Property Name="RunTime" Type="DateTime" Precision="3" />
+          <Property Name="UseUserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateUserId" Type="Int32" />
+          <NavigationProperty Name="box_good_online" Relationship="box_omsModel.FK_BOX_GOODONLINE_REFERENCE_BOX_GOOD" FromRole="box_good" ToRole="box_good_online" />
+          <NavigationProperty Name="box_subject_edition" Relationship="box_omsModel.FK_BOX_SUBJ_REFERENCE_BOX_GOOD" FromRole="box_good" ToRole="box_subject_edition" />
+          <NavigationProperty Name="box_update_sys_log" Relationship="box_omsModel.FK_BOX_UPDATESYSLOG_REFERENCE_BOX_GOOD" FromRole="box_good" ToRole="box_update_sys_log" />
+          <Property Name="ExpirTime" Type="DateTime" Precision="3" />
+          <Property Name="Validity" Type="Int32" />
+        </EntityType>
+        <EntityType Name="box_good_online">
+          <Key>
+            <PropertyRef Name="BoxId" />
+          </Key>
+          <Property Name="BoxId" Type="Int32" Nullable="false" />
+          <Property Name="LastTime" Type="DateTime" Precision="3" />
+          <Property Name="LastIp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="box_good" Relationship="box_omsModel.FK_BOX_GOODONLINE_REFERENCE_BOX_GOOD" FromRole="box_good_online" ToRole="box_good" />
+        </EntityType>
+        <EntityType Name="box_resource_statist">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="BoxId" Type="Int32" Nullable="false" />
+          <Property Name="Mac" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Subject" Type="Int32" />
+          <Property Name="Edition" Type="Int32" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="box_resource_statist_day">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="BoxId" Type="Int32" Nullable="false" />
+          <Property Name="Mac" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Subject" Type="Int32" />
+          <Property Name="Edition" Type="Int32" />
+          <Property Name="f0" Type="Int32" Nullable="false" />
+          <Property Name="f1" Type="Int32" Nullable="false" />
+          <Property Name="f2" Type="Int32" Nullable="false" />
+          <Property Name="f3" Type="Int32" Nullable="false" />
+          <Property Name="f4" Type="Int32" Nullable="false" />
+          <Property Name="f5" Type="Int32" Nullable="false" />
+          <Property Name="f6" Type="Int32" Nullable="false" />
+          <Property Name="f7" Type="Int32" Nullable="false" />
+          <Property Name="f8" Type="Int32" Nullable="false" />
+          <Property Name="f9" Type="Int32" Nullable="false" />
+          <Property Name="f10" Type="Int32" Nullable="false" />
+          <Property Name="f11" Type="Int32" Nullable="false" />
+          <Property Name="f12" Type="Int32" Nullable="false" />
+          <Property Name="EditionTotal" Type="Int32" Nullable="false" />
+          <Property Name="SubjectTotal" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="box_subject_edition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="BoxId" Type="Int32" Nullable="false" />
+          <Property Name="Subject" Type="Int32" Nullable="false" />
+          <Property Name="Edition" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="box_good" Relationship="box_omsModel.FK_BOX_SUBJ_REFERENCE_BOX_GOOD" FromRole="box_subject_edition" ToRole="box_good" />
+        </EntityType>
+        <EntityType Name="box_update_sys">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VNumber" Type="Double" Nullable="false" />
+          <Property Name="PackUrl" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Principal" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cause" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="false" />
+          <Property Name="IsPublish" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="box_update_sys_log" Relationship="box_omsModel.FK_OMS_BOX_UPDATESYS_REFERENCE_OMS_BOX_UPDATESYSLOG" FromRole="box_update_sys" ToRole="box_update_sys_log" />
+        </EntityType>
+        <EntityType Name="box_update_sys_log">
+          <Key>
+            <PropertyRef Name="UpdateId" />
+            <PropertyRef Name="BoxId" />
+          </Key>
+          <Property Name="UpdateId" Type="Int32" Nullable="false" />
+          <Property Name="BoxId" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FinishTime" Type="DateTime" Precision="3" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="box_good" Relationship="box_omsModel.FK_BOX_UPDATESYSLOG_REFERENCE_BOX_GOOD" FromRole="box_update_sys_log" ToRole="box_good" />
+          <NavigationProperty Name="box_update_sys" Relationship="box_omsModel.FK_OMS_BOX_UPDATESYS_REFERENCE_OMS_BOX_UPDATESYSLOG" FromRole="box_update_sys_log" ToRole="box_update_sys" />
+        </EntityType>
+        <EntityType Name="oms_district">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="GUID" Type="Guid" Nullable="false" />
+          <Property Name="CodeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Seq" Type="Int32" />
+          <Property Name="ParentID" Type="Int32" />
+          <Property Name="LevelCode" Type="Int32" />
+          <Property Name="IsEnd" Type="Int32" />
+          <Property Name="NeedShow" Type="Int32" />
+          <Property Name="Path" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ModifyDateTime" Type="DateTime" Precision="3" />
+          <Property Name="Deleted" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rp_cdkey">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="EntId" Type="Int32" />
+          <Property Name="UseProv" Type="Int32" />
+          <Property Name="UseCity" Type="Int32" />
+          <Property Name="UseDist" Type="Int32" />
+          <Property Name="UseSchool" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Validity" Type="Int32" />
+          <Property Name="ExpirTime" Type="DateTime" Precision="3" />
+          <Property Name="AuthUserCount" Type="Int32" />
+          <Property Name="UseUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ActiveMac" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ActiveDisk" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ActiveTime" Type="DateTime" Precision="3" />
+          <Property Name="ActiveIp" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ActiveCode" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="rp_cdkey_and_edition" Relationship="box_omsModel.FK_CDKEYANDEDITION_REFERENCE_CDKEY" FromRole="rp_cdkey" ToRole="rp_cdkey_and_edition" />
+          <NavigationProperty Name="rp_enterprise" Relationship="box_omsModel.FK_RP_CDKEY_REFERENCE_RP_ENTER" FromRole="rp_cdkey" ToRole="rp_enterprise" />
+          <NavigationProperty Name="rp_resource_statist" Relationship="box_omsModel.FK_RP_RESOU_REFERENCE_RP_CDKEY" FromRole="rp_cdkey" ToRole="rp_resource_statist" />
+          <NavigationProperty Name="rp_log_login" Relationship="box_omsModel.FK_RP_LOG_L_REFERENCE_RP_CDKEY" FromRole="rp_cdkey" ToRole="rp_log_login" />
+        </EntityType>
+        <EntityType Name="rp_cdkey_and_edition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="CdKey" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="Subject" Type="Int32" Nullable="false" />
+          <Property Name="Edition" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="rp_cdkey" Relationship="box_omsModel.FK_CDKEYANDEDITION_REFERENCE_CDKEY" FromRole="rp_cdkey_and_edition" ToRole="rp_cdkey" />
+        </EntityType>
+        <EntityType Name="rp_enterprise">
+          <Key>
+            <PropertyRef Name="EntId" />
+          </Key>
+          <Property Name="EntId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="rp_cdkey" Relationship="box_omsModel.FK_RP_CDKEY_REFERENCE_RP_ENTER" FromRole="rp_enterprise" ToRole="rp_cdkey" />
+        </EntityType>
+        <EntityType Name="rp_log_login">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="LoginAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LoginUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LoginSchool" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LoginRoleName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LoginEnte" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LoginDistName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LoginKey" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="LoginTime" Type="DateTime" Precision="3" />
+          <Property Name="LoginIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="rp_cdkey" Relationship="box_omsModel.FK_RP_LOG_L_REFERENCE_RP_CDKEY" FromRole="rp_log_login" ToRole="rp_cdkey" />
+        </EntityType>
+        <EntityType Name="sys_role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="sys_role_and_auth" Relationship="box_omsModel.FK_SYS_ROLE_AND_AUTH_REFERENCE_SYS_ROLE" FromRole="sys_role" ToRole="sys_role_and_auth" />
+          <NavigationProperty Name="sys_user_and_role" Relationship="box_omsModel.FK_SYS_USER_AND_ROLE_REFERENCE_SYS_ROLE" FromRole="sys_role" ToRole="sys_user_and_role" />
+        </EntityType>
+        <EntityType Name="sys_role_and_auth">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="LeftId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="sys_role" Relationship="box_omsModel.FK_SYS_ROLE_AND_AUTH_REFERENCE_SYS_ROLE" FromRole="sys_role_and_auth" ToRole="sys_role" />
+        </EntityType>
+        <EntityType Name="sys_user">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Account" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="sys_user_and_role" Relationship="box_omsModel.FK_SYS_USER_AND_ROLE_REFERENCE_SYS_USER" FromRole="sys_user" ToRole="sys_user_and_role" />
+        </EntityType>
+        <EntityType Name="sys_user_and_role">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="sys_role" Relationship="box_omsModel.FK_SYS_USER_AND_ROLE_REFERENCE_SYS_ROLE" FromRole="sys_user_and_role" ToRole="sys_role" />
+          <NavigationProperty Name="sys_user" Relationship="box_omsModel.FK_SYS_USER_AND_ROLE_REFERENCE_SYS_USER" FromRole="sys_user_and_role" ToRole="sys_user" />
+        </EntityType>
+        <Association Name="FK_BOX_GOODONLINE_REFERENCE_BOX_GOOD">
+          <End Type="box_omsModel.box_good" Role="box_good" Multiplicity="1" />
+          <End Type="box_omsModel.box_good_online" Role="box_good_online" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="box_good">
+              <PropertyRef Name="BoxId" />
+            </Principal>
+            <Dependent Role="box_good_online">
+              <PropertyRef Name="BoxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BOX_SUBJ_REFERENCE_BOX_GOOD">
+          <End Type="box_omsModel.box_good" Role="box_good" Multiplicity="1" />
+          <End Type="box_omsModel.box_subject_edition" Role="box_subject_edition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="box_good">
+              <PropertyRef Name="BoxId" />
+            </Principal>
+            <Dependent Role="box_subject_edition">
+              <PropertyRef Name="BoxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BOX_UPDATESYSLOG_REFERENCE_BOX_GOOD">
+          <End Type="box_omsModel.box_good" Role="box_good" Multiplicity="1" />
+          <End Type="box_omsModel.box_update_sys_log" Role="box_update_sys_log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="box_good">
+              <PropertyRef Name="BoxId" />
+            </Principal>
+            <Dependent Role="box_update_sys_log">
+              <PropertyRef Name="BoxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OMS_BOX_UPDATESYS_REFERENCE_OMS_BOX_UPDATESYSLOG">
+          <End Type="box_omsModel.box_update_sys" Role="box_update_sys" Multiplicity="1" />
+          <End Type="box_omsModel.box_update_sys_log" Role="box_update_sys_log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="box_update_sys">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="box_update_sys_log">
+              <PropertyRef Name="UpdateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CDKEYANDEDITION_REFERENCE_CDKEY">
+          <End Type="box_omsModel.rp_cdkey" Role="rp_cdkey" Multiplicity="1" />
+          <End Type="box_omsModel.rp_cdkey_and_edition" Role="rp_cdkey_and_edition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rp_cdkey">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="rp_cdkey_and_edition">
+              <PropertyRef Name="CdKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RP_CDKEY_REFERENCE_RP_ENTER">
+          <End Type="box_omsModel.rp_enterprise" Role="rp_enterprise" Multiplicity="0..1" />
+          <End Type="box_omsModel.rp_cdkey" Role="rp_cdkey" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rp_enterprise">
+              <PropertyRef Name="EntId" />
+            </Principal>
+            <Dependent Role="rp_cdkey">
+              <PropertyRef Name="EntId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SYS_ROLE_AND_AUTH_REFERENCE_SYS_ROLE">
+          <End Type="box_omsModel.sys_role" Role="sys_role" Multiplicity="1" />
+          <End Type="box_omsModel.sys_role_and_auth" Role="sys_role_and_auth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sys_role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="sys_role_and_auth">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SYS_USER_AND_ROLE_REFERENCE_SYS_ROLE">
+          <End Type="box_omsModel.sys_role" Role="sys_role" Multiplicity="1" />
+          <End Type="box_omsModel.sys_user_and_role" Role="sys_user_and_role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sys_role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="sys_user_and_role">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SYS_USER_AND_ROLE_REFERENCE_SYS_USER">
+          <End Type="box_omsModel.sys_user" Role="sys_user" Multiplicity="1" />
+          <End Type="box_omsModel.sys_user_and_role" Role="sys_user_and_role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sys_user">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="sys_user_and_role">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="rp_resource_statist">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="Cd_key" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="SubjectId" Type="Int32" />
+          <Property Name="EditionId" Type="Int32" />
+          <Property Name="EditionName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="ResourceType" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="rp_cdkey" Relationship="box_omsModel.FK_RP_RESOU_REFERENCE_RP_CDKEY" FromRole="rp_resource_statist" ToRole="rp_cdkey" />
+          <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="RoleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="SchoolName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_RP_RESOU_REFERENCE_RP_CDKEY">
+          <End Type="box_omsModel.rp_cdkey" Role="rp_cdkey" Multiplicity="0..1" />
+          <End Type="box_omsModel.rp_resource_statist" Role="rp_resource_statist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rp_cdkey">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="rp_resource_statist">
+              <PropertyRef Name="Cd_key" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RP_LOG_L_REFERENCE_RP_CDKEY">
+          <End Type="box_omsModel.rp_cdkey" Role="rp_cdkey" Multiplicity="0..1" />
+          <End Type="box_omsModel.rp_log_login" Role="rp_log_login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rp_cdkey">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="rp_log_login">
+              <PropertyRef Name="LoginKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="box_omsModelStoreContainer" CdmEntityContainer="box_omsEntities">
+          <EntitySetMapping Name="box_good">
+            <EntityTypeMapping TypeName="box_omsModel.box_good">
+              <MappingFragment StoreEntitySet="box_good">
+                <ScalarProperty Name="Validity" ColumnName="Validity" />
+                <ScalarProperty Name="ExpirTime" ColumnName="ExpirTime" />
+                <ScalarProperty Name="UpdateUserId" ColumnName="UpdateUserId" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="UseUserName" ColumnName="UseUserName" />
+                <ScalarProperty Name="RunTime" ColumnName="RunTime" />
+                <ScalarProperty Name="FirstRunTime" ColumnName="FirstRunTime" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Prov" ColumnName="Prov" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="IsActiv" ColumnName="IsActiv" />
+                <ScalarProperty Name="IsCanUpdate" ColumnName="IsCanUpdate" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="UpTime" ColumnName="UpTime" />
+                <ScalarProperty Name="Principal" ColumnName="Principal" />
+                <ScalarProperty Name="SysVersion" ColumnName="SysVersion" />
+                <ScalarProperty Name="Edition" ColumnName="Edition" />
+                <ScalarProperty Name="ActivNumber" ColumnName="ActivNumber" />
+                <ScalarProperty Name="Mac" ColumnName="Mac" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="BoxId" ColumnName="BoxId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="box_good_online">
+            <EntityTypeMapping TypeName="box_omsModel.box_good_online">
+              <MappingFragment StoreEntitySet="box_good_online">
+                <ScalarProperty Name="LastIp" ColumnName="LastIp" />
+                <ScalarProperty Name="LastTime" ColumnName="LastTime" />
+                <ScalarProperty Name="BoxId" ColumnName="BoxId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="box_resource_statist">
+            <EntityTypeMapping TypeName="box_omsModel.box_resource_statist">
+              <MappingFragment StoreEntitySet="box_resource_statist">
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Edition" ColumnName="Edition" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Mac" ColumnName="Mac" />
+                <ScalarProperty Name="BoxId" ColumnName="BoxId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="box_resource_statist_day">
+            <EntityTypeMapping TypeName="box_omsModel.box_resource_statist_day">
+              <MappingFragment StoreEntitySet="box_resource_statist_day">
+                <ScalarProperty Name="SubjectTotal" ColumnName="SubjectTotal" />
+                <ScalarProperty Name="EditionTotal" ColumnName="EditionTotal" />
+                <ScalarProperty Name="f12" ColumnName="f12" />
+                <ScalarProperty Name="f11" ColumnName="f11" />
+                <ScalarProperty Name="f10" ColumnName="f10" />
+                <ScalarProperty Name="f9" ColumnName="f9" />
+                <ScalarProperty Name="f8" ColumnName="f8" />
+                <ScalarProperty Name="f7" ColumnName="f7" />
+                <ScalarProperty Name="f6" ColumnName="f6" />
+                <ScalarProperty Name="f5" ColumnName="f5" />
+                <ScalarProperty Name="f4" ColumnName="f4" />
+                <ScalarProperty Name="f3" ColumnName="f3" />
+                <ScalarProperty Name="f2" ColumnName="f2" />
+                <ScalarProperty Name="f1" ColumnName="f1" />
+                <ScalarProperty Name="f0" ColumnName="f0" />
+                <ScalarProperty Name="Edition" ColumnName="Edition" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="SDate" ColumnName="SDate" />
+                <ScalarProperty Name="Mac" ColumnName="Mac" />
+                <ScalarProperty Name="BoxId" ColumnName="BoxId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="box_subject_edition">
+            <EntityTypeMapping TypeName="box_omsModel.box_subject_edition">
+              <MappingFragment StoreEntitySet="box_subject_edition">
+                <ScalarProperty Name="Edition" ColumnName="Edition" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="BoxId" ColumnName="BoxId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="box_update_sys">
+            <EntityTypeMapping TypeName="box_omsModel.box_update_sys">
+              <MappingFragment StoreEntitySet="box_update_sys">
+                <ScalarProperty Name="IsPublish" ColumnName="IsPublish" />
+                <ScalarProperty Name="Cause" ColumnName="Cause" />
+                <ScalarProperty Name="Principal" ColumnName="Principal" />
+                <ScalarProperty Name="PackUrl" ColumnName="PackUrl" />
+                <ScalarProperty Name="VNumber" ColumnName="VNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="box_update_sys_log">
+            <EntityTypeMapping TypeName="box_omsModel.box_update_sys_log">
+              <MappingFragment StoreEntitySet="box_update_sys_log">
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="FinishTime" ColumnName="FinishTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="BoxId" ColumnName="BoxId" />
+                <ScalarProperty Name="UpdateId" ColumnName="UpdateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="oms_district">
+            <EntityTypeMapping TypeName="box_omsModel.oms_district">
+              <MappingFragment StoreEntitySet="oms_district">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="ModifyDateTime" ColumnName="ModifyDateTime" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="NeedShow" ColumnName="NeedShow" />
+                <ScalarProperty Name="IsEnd" ColumnName="IsEnd" />
+                <ScalarProperty Name="LevelCode" ColumnName="LevelCode" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="Seq" ColumnName="Seq" />
+                <ScalarProperty Name="CodeName" ColumnName="CodeName" />
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rp_cdkey">
+            <EntityTypeMapping TypeName="box_omsModel.rp_cdkey">
+              <MappingFragment StoreEntitySet="rp_cdkey">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="ActiveCode" ColumnName="ActiveCode" />
+                <ScalarProperty Name="ActiveIp" ColumnName="ActiveIp" />
+                <ScalarProperty Name="ActiveTime" ColumnName="ActiveTime" />
+                <ScalarProperty Name="ActiveDisk" ColumnName="ActiveDisk" />
+                <ScalarProperty Name="ActiveMac" ColumnName="ActiveMac" />
+                <ScalarProperty Name="UseUser" ColumnName="UseUser" />
+                <ScalarProperty Name="AuthUserCount" ColumnName="AuthUserCount" />
+                <ScalarProperty Name="ExpirTime" ColumnName="ExpirTime" />
+                <ScalarProperty Name="Validity" ColumnName="Validity" />
+                <ScalarProperty Name="UseSchool" ColumnName="UseSchool" />
+                <ScalarProperty Name="UseDist" ColumnName="UseDist" />
+                <ScalarProperty Name="UseCity" ColumnName="UseCity" />
+                <ScalarProperty Name="UseProv" ColumnName="UseProv" />
+                <ScalarProperty Name="EntId" ColumnName="EntId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rp_cdkey_and_edition">
+            <EntityTypeMapping TypeName="box_omsModel.rp_cdkey_and_edition">
+              <MappingFragment StoreEntitySet="rp_cdkey_and_edition">
+                <ScalarProperty Name="Edition" ColumnName="Edition" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="CdKey" ColumnName="CdKey" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rp_enterprise">
+            <EntityTypeMapping TypeName="box_omsModel.rp_enterprise">
+              <MappingFragment StoreEntitySet="rp_enterprise">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="EntName" ColumnName="EntName" />
+                <ScalarProperty Name="EntId" ColumnName="EntId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rp_log_login">
+            <EntityTypeMapping TypeName="box_omsModel.rp_log_login">
+              <MappingFragment StoreEntitySet="rp_log_login">
+                <ScalarProperty Name="LoginIP" ColumnName="LoginIP" />
+                <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
+                <ScalarProperty Name="LoginKey" ColumnName="LoginKey" />
+                <ScalarProperty Name="LoginDistName" ColumnName="LoginDistName" />
+                <ScalarProperty Name="LoginEnte" ColumnName="LoginEnte" />
+                <ScalarProperty Name="LoginRoleName" ColumnName="LoginRoleName" />
+                <ScalarProperty Name="LoginSchool" ColumnName="LoginSchool" />
+                <ScalarProperty Name="LoginUserName" ColumnName="LoginUserName" />
+                <ScalarProperty Name="LoginAccount" ColumnName="LoginAccount" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sys_role">
+            <EntityTypeMapping TypeName="box_omsModel.sys_role">
+              <MappingFragment StoreEntitySet="sys_role">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sys_role_and_auth">
+            <EntityTypeMapping TypeName="box_omsModel.sys_role_and_auth">
+              <MappingFragment StoreEntitySet="sys_role_and_auth">
+                <ScalarProperty Name="LeftId" ColumnName="LeftId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sys_user">
+            <EntityTypeMapping TypeName="box_omsModel.sys_user">
+              <MappingFragment StoreEntitySet="sys_user">
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sys_user_and_role">
+            <EntityTypeMapping TypeName="box_omsModel.sys_user_and_role">
+              <MappingFragment StoreEntitySet="sys_user_and_role">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rp_resource_statist">
+            <EntityTypeMapping TypeName="box_omsModel.rp_resource_statist">
+              <MappingFragment StoreEntitySet="rp_resource_statist">
+                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="ResourceType" ColumnName="ResourceType" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="EditionName" ColumnName="EditionName" />
+                <ScalarProperty Name="EditionId" ColumnName="EditionId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Cd_key" ColumnName="Cd_key" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

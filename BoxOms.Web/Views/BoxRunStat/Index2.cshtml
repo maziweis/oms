@@ -1,0 +1,27 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutTopLeft.cshtml";
+}
+
+@model VM_BoxRunStat_Index2
+
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation"><a href="@Url.Action("Index")">运行情况</a></li>
+    <li role="presentation" class="active"><a href="@Url.Action("Index2")">访问统计</a></li>
+</ul>
+
+<div class="tab-content">
+    @using (Html.BeginForm("Index2", "BoxRunStat", FormMethod.Get, new { @class = "form-inline", id = "form1" }))
+    {
+        <div class="row">
+            <div class="col-md-12">
+                @Html.TextBoxFor(m => m.SDate, new { @class = "form-control", @autocomplete = "off", @placeholder = "请输入：起始日期", @onclick = "WdatePicker()" })
+                -
+                @Html.TextBoxFor(m => m.EDate, new { @class = "form-control", @autocomplete = "off", @placeholder = "请输入：结束日期", @onclick = "WdatePicker()" })
+                <button class="btn btn-default" type="button" onclick="search()">搜索</button>
+            </div>
+        </div>
+    }
+    <div class="datas">
+        @Html.Partial("_IndexGrid2", Model.Grid)
+    </div>
+</div>

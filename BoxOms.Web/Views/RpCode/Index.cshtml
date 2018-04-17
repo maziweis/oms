@@ -1,0 +1,83 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutTopLeft.cshtml";
+    ViewBag.Provs = BoxOms.Web.BLL.BoxGoodBLL.GetData();
+    ViewBag.Citys = Model == null || Model.Prov == null ? new Dictionary<int, string>() : BoxOms.Web.BLL.BoxGoodBLL.GetData((int)Model.Prov);
+    ViewBag.Areas = Model == null || Model.City == null ? new Dictionary<int, string>() : BoxOms.Web.BLL.BoxGoodBLL.GetData((int)Model.City);
+}
+
+@model VM_RpCode_Index
+
+<div class="panel panel-default">
+    <div class="panel-heading">激活码管理</div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Index", "RpCode", FormMethod.Get, new { @class = "form-inline", id = "form1" }))
+        {
+            @Html.HiddenFor(m => m.Grid.Pager.PageIndex)
+            @Html.HiddenFor(m => m.Grid.Pager.PageSize)
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.DropDownListFor(m => m.Prov, new SelectList(ViewBag.Provs, "key", "value"), "--请选择省份--", new { @class = "form-control", @onchange = "s1();search();" })
+                    @Html.DropDownListFor(m => m.City, new SelectList(ViewBag.Citys, "key", "value"), "--请选择城市--", new { @class = "form-control", @onchange = "s2();search();" })
+                    @Html.DropDownListFor(m => m.Area, new SelectList(ViewBag.Areas, "key", "value"), "--请选择区域--", new { @class = "form-control", @onchange = "search();" })
+                    <div class="input-group">
+
+                        @Html.TextBoxFor(m => m.Key, new { @class = "form-control", @autocomplete = "off", @placeholder = "请输入：企业名称" })
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="search()">搜索</button>
+                        </span>
+                    </div>
+                    <a class="btn btn-default" href="@Url.Action("Add")" role="button" data-toggle="modal" data-target="#myModal" data-backdrop="static">新增</a>
+                </div>
+            </div>
+        }
+        <div class="datas">
+            @Html.Partial("_IndexGrid", Model.Grid.Data)
+        </div>
+        @Html.Pager(Model.Grid.Pager)
+    </div>
+</div>
+@section Scripts {
+    <script src="@Url.Content("/Content/Js/Rp_Code.js")"></script>
+}
+<script src="@Url.Content("/Content/Tools/jquery/jquery-1.10.2.min.js")"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#Prov").change(function () {//加载城市
+            $("#City").empty();
+            $("#Area").empty();
+            $("<option></option>").val("").text("--请选择城市--").appendTo($("#City"));
+            $("<option></option>").val("").text("--请选择区域--").appendTo($("#Area"));
+
+            $.getJSON("/BoxRunStat/GetCitys", { pid: $("#Prov").val() }, function (data) {
+                $.each(data, function (i, item) {
+                    $("<option></option>").val(item["Value"]).text(item["Text"]).appendTo($("#City"));
+                });
+            });
+        });
+
+        $("#City").change(function () {//加载区县
+            $("#Area").empty();
+            $("#BoxID").empty();
+            $("<option></option>").val("").text("--请选择区域--").appendTo($("#Area"));
+            $("<option></option>").val("").text("--请选择学校--").appendTo($("#SchoolId"));
+
+            $.getJSON("/BoxRunStat/GetAreas", { cid: $("#City").val() }, function (data) {
+                $.each(data, function (i, item) {
+                    $("<option></option>").val(item["Value"]).text(item["Text"]).appendTo($("#Area"));
+                });
+            });
+        });
+    });
+    function s1() {
+        $("#City").empty();
+        $("#Area").empty();
+        $("<option></option>").val("").text("--请选择--").appendTo($("#City"));
+        $("<option></option>").val("").text("--请选择--").appendTo($("#Area"));
+    }
+
+    function s2() {
+        $("#Area").empty();
+        $("<option></option>").val("").text("--请选择--").appendTo($("#Area"));
+    }
+
+</script>

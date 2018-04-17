@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A353D88E-6113-4C2A-BF45-D26909A82D75}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BoxOms.Database</RootNamespace>
+    <AssemblyName>BoxOms.Database</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BoxOMSModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BoxOMSModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BoxOMSModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BoxOMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BoxOMSModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BoxOMSModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="box_good.cs">
+      <DependentUpon>BoxOMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="box_good_online.cs">
+      <DependentUpon>BoxOMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="box_resource_statist.cs">
+      <DependentUpon>BoxOMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="box_resource_statist_day.cs">
+      <DependentUpon>BoxOMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="box_subject_edition.cs">
+      <DependentUpon>BoxOMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="box_update_sys.cs">
+      <DependentUpon>BoxOMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="box_update_sys_log.cs">
+      <DependentUpon>BoxOMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="oms_district.cs">
+      <DependentUpon>BoxOMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="rp_cdkey.cs">
+      <DependentUpon>BoxOMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="rp_cdkey_and_edition.cs">
+      <DependentUpon>BoxOMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="rp_enterprise.cs">
+      <DependentUpon>BoxOMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="rp_log_login.cs">
+      <DependentUpon>BoxOMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="rp_resource_statist.cs">
+      <DependentUpon>BoxOMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sys_role.cs">
+      <DependentUpon>BoxOMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sys_role_and_auth.cs">
+      <DependentUpon>BoxOMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sys_user.cs">
+      <DependentUpon>BoxOMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sys_user_and_role.cs">
+      <DependentUpon>BoxOMSModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="BoxOMSModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BoxOMSModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="BoxOMSModel.edmx.diagram">
+      <DependentUpon>BoxOMSModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BoxOMSModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BoxOMSModel.edmx</DependentUpon>
+      <LastGenOutput>BoxOMSModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="BoxOMSModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BoxOMSModel.edmx</DependentUpon>
+      <LastGenOutput>BoxOMSModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

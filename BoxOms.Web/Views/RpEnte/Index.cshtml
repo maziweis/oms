@@ -1,0 +1,35 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutTopLeft.cshtml";
+}
+
+@model VM_RpEnte_Index
+
+<div class="panel panel-default">
+    <div class="panel-heading">企业管理</div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Index", "RpEnte", FormMethod.Get, new { @class = "form-inline", id = "form1" }))
+        {
+            @Html.HiddenFor(m => m.Grid.Pager.PageIndex)
+            @Html.HiddenFor(m => m.Grid.Pager.PageSize)
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        @Html.TextBoxFor(m => m.Key, new { @class = "form-control", @autocomplete = "off", @placeholder = "请输入：企业名称" })
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="search()">搜索</button>
+                        </span>
+                    </div>
+                    <a class="btn btn-default" href="@Url.Action("Add")" role="button" data-toggle="modal" data-target="#myModal" data-backdrop="static">新增</a>
+                </div>
+            </div>
+        }
+        <div class="datas">
+            @Html.Partial("_IndexGrid", Model.Grid.Data)
+        </div>
+        @Html.Pager(Model.Grid.Pager)
+    </div>
+</div>
+
+@section Scripts {
+    <script src="@Url.Content("/Content/Js/RpEnte.js")"></script>
+}

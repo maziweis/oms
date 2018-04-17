@@ -1,0 +1,250 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutTopLeft.cshtml";
+    Dictionary<int, string> dict = BoxOms.Dict.Course.Get();
+    Dictionary<int, string> dict1 = BoxOms.Dict.Edition.Get();
+    ViewBag.Provs = BoxOms.Web.BLL.BoxGoodBLL.GetData();
+    ViewBag.Citys = Model == null || Model.Prov == null ? new Dictionary<int, string>() : BoxOms.Web.BLL.BoxGoodBLL.GetData((int)Model.Prov);
+    ViewBag.Areas = Model == null || Model.City == null ? new Dictionary<int, string>() : BoxOms.Web.BLL.BoxGoodBLL.GetData((int)Model.City);
+    ViewBag.SchoolNames = Model == null || Model.Area == null ? new Dictionary<int, string>() : BoxOms.Web.BLL.BoxGoodBLL.GetSchoolData(Model.Area.ToString());
+}
+
+@model VM_BoxSta_Index
+<style type="text/css">
+    .table th, .table td {
+        text-align: center;
+        vertical-align: middle !important;
+        border: 1px solid #ccc;
+        vertical-align: middle;
+        padding: 10px;
+    }
+</style>
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="@Url.Action("Index")">学校数据统计</a></li>
+    <li role="presentation"><a href="@Url.Action("AllTotal")">总体统计</a></li>
+</ul>
+
+<div class="tab-content">
+    @using (Html.BeginForm("Index", "BoxStatistical", FormMethod.Get, new { @class = "form-inline", id = "form1" }))
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" value="@(Model.SDate==null?"":Convert.ToDateTime(Model.SDate).ToString("yyyy-MM-dd"))" data-val="true" data-val-date="字段 SDate 必须是日期。" id="SDate" name="SDate" class="form-control" autocomplete="off" placeholder="请输入：起始日期" onfocus="WdatePicker({ maxDate: '#F{$dp.$D(\'EDate\')}' })" />
+                -
+                <input type="text" id="EDate" value="@(Model.SDate==null?"":Convert.ToDateTime(Model.EDate).ToString("yyyy-MM-dd"))" name="EDate" data-val="true" data-val-date="字段 EDate 必须是日期。" class="form-control" autocomplete="off" placeholder="请输入：结束日期" onfocus="WdatePicker({ minDate: '#F{$dp.$D(\'SDate\')}' })" />
+                <button class="btn btn-default" type="button" onclick="search()">搜索</button><br /><br />
+                @Html.DropDownListFor(m => m.Prov, new SelectList(ViewBag.Provs, "key", "value"), "--请选择省份--", new { @class = "form-control", @onchange = "s1();search();" })
+                @Html.DropDownListFor(m => m.City, new SelectList(ViewBag.Citys, "key", "value"), "--请选择城市--", new { @class = "form-control", @onchange = "s2();search();" })
+                @Html.DropDownListFor(m => m.Area, new SelectList(ViewBag.Areas, "key", "value"), "--请选择区域--", new { @class = "form-control", @onchange = "search();" })
+                @Html.DropDownListFor(m => m.BoxID, new SelectList(ViewBag.SchoolNames, "key", "value"), "--请选择学校--", new { @class = "form-control", @onchange = "search();" })
+                <a id="export" class="btn btn-default" href="#">导出Excel</a>
+            </div>
+            <div class="col-md-12">
+
+            </div>
+        </div>
+    }
+    <div class="datas">
+        <table class="table table-hover">
+            @if (Model.grid.Chinese.Count != 0 || Model.grid.Math.Count != 0 || Model.grid.English.Count != 0)
+            {
+                int _engNum = 0;
+                int _matNum = 0;
+                int _chiNum = 0;
+                if (Model.grid.English.Count > 0)
+                {
+                    _engNum = Model.grid.English.Count * 2;
+                }
+                if (Model.grid.Math.Count > 0)
+                {
+                    _matNum = Model.grid.Math.Count * 2;
+                }
+                if (Model.grid.Chinese.Count > 0)
+                {
+                    _chiNum = Model.grid.Chinese.Count * 2;
+                }
+                <tr>
+                    <th>学科</th>
+                    @if (_engNum > 0)
+                    {
+                        <th colspan='@_engNum'>英语</th>
+                    }
+                    @if (_matNum > 0)
+                    {
+                        <th colspan='@_matNum'>数学</th>
+                    }
+                    @if (_chiNum > 0)
+                    {
+                        <th colspan='@_chiNum'>语文</th>
+                    }
+
+                </tr>
+                <tr>
+                    <th>版本</th>
+                    @if (Model.grid.English.Count > 0)
+                    {
+                        foreach (var item in Model.grid.English)
+                        {
+                            <th colspan="2">@BoxOms.Dict.Edition.GetVal(Convert.ToInt32(item))</th>
+                        }
+                    }
+                    @if (Model.grid.Math.Count > 0)
+                    {
+                        foreach (var item in Model.grid.Math)
+                        {
+                            <th colspan="2">@BoxOms.Dict.Edition.GetVal(Convert.ToInt32(item))</th>
+                        }
+                    }
+                    @if (Model.grid.Chinese.Count > 0)
+                    {
+                        foreach (var item in Model.grid.Chinese)
+                        {
+                            <th colspan="2">@BoxOms.Dict.Edition.GetVal(Convert.ToInt32(item))</th>
+                        }
+                    }
+                </tr>
+
+                for (int i = 0; i < 13; i++)
+                {
+                    <tr>
+                        @if (i == 0)
+                        {
+                            <th rowspan='13'>模块</th>
+                        }
+                        @if (Model.grid.English.Count > 0)
+                        {
+                            for (int j = 0; j < Model.grid.English.Count; j++)
+                            {
+                                string _typeName = BoxOms.Web.BLL.BoxStaBLL.BackTypeName(3, Convert.ToInt32(Model.grid.English[j]))[i];
+                                <th>@_typeName</th>
+                                <td>@(string.IsNullOrEmpty(_typeName) ? "" : BoxOms.Web.BLL.BoxStaBLL.BackNum(Model.list, 3, Convert.ToInt32(Model.grid.English[j]), _typeName).ToString())</td>
+                            }
+                        }
+                        @if (Model.grid.Math.Count > 0)
+                        {
+                            for (int j = 0; j < Model.grid.Math.Count; j++)
+                            {
+                                string _typeName = BoxOms.Web.BLL.BoxStaBLL.BackTypeName(3, Convert.ToInt32(Model.grid.Math[j]))[i];
+                                <th>@_typeName</th>
+                                <td>@(string.IsNullOrEmpty(_typeName) ? "" : BoxOms.Web.BLL.BoxStaBLL.BackNum(Model.list, 2, Convert.ToInt32(Model.grid.Math[j]), _typeName).ToString())</td>
+                            }
+                        }
+                        @if (Model.grid.Chinese.Count > 0)
+                        {
+                            for (int j = 0; j < Model.grid.Chinese.Count; j++)
+                            {
+                                string _typeName = BoxOms.Web.BLL.BoxStaBLL.BackTypeName(1, Convert.ToInt32(Model.grid.Chinese[j]))[i];
+                                <th>@_typeName</th>
+                                <td>@(string.IsNullOrEmpty(_typeName) ? "" : BoxOms.Web.BLL.BoxStaBLL.BackNum(Model.list, 1, Convert.ToInt32(Model.grid.Chinese[j]), _typeName).ToString())</td>
+                            }
+                        }
+                    </tr>
+                }
+                <tr>
+                    <th>版本小计</th>
+                    @if (Model.grid.English.Count > 0)
+                    {
+                        for (int j = 0; j < Model.grid.English.Count; j++)
+                        {
+                            <td></td>
+                            <td>@BoxOms.Web.BLL.BoxStaBLL.BackNumTotal(Model.list, 3, Convert.ToInt32(Model.grid.English[j]))</td>
+                        }
+                    }
+                    @if (Model.grid.Math.Count > 0)
+                    {
+                        for (int j = 0; j < Model.grid.Math.Count; j++)
+                        {
+                            <td></td>
+                            <td>@BoxOms.Web.BLL.BoxStaBLL.BackNumTotal(Model.list, 2, Convert.ToInt32(Model.grid.Math[j]))</td>
+                        }
+                    }
+                    @if (Model.grid.Chinese.Count > 0)
+                    {
+                        for (int j = 0; j < Model.grid.Chinese.Count; j++)
+                        {
+                            <td></td>
+                            <td>@BoxOms.Web.BLL.BoxStaBLL.BackNumTotal(Model.list, 1, Convert.ToInt32(Model.grid.Chinese[j]))</td>
+                        }
+                    }
+                </tr>
+                <tr>
+                    <th>最近回执</th>
+                    <td colspan='@((_engNum+_matNum+_chiNum))'>@Model.RunTime</td>
+                </tr>
+                <tr>
+                    <th>回执次数</th>
+                    <td colspan='@((_engNum+_matNum+_chiNum))'>@Model.total</td>
+                </tr>
+
+            }
+            else
+            {
+                <tr>
+                    <th>学科</th>
+                    <th>英语</th>
+                    <th>数学</th>
+                    <th>语文</th>
+                </tr>
+                <tr><td class="nodata" colspan="4">目前没有任何数据</td></tr>
+            }
+        </table>
+    </div>
+</div>
+<script src="@Url.Content("/Content/Tools/jquery/jquery-1.10.2.min.js")"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#Prov").change(function () {//加载城市
+            $("#City").empty();
+            $("#Area").empty();
+            $("#BoxID").empty();
+            $("<option></option>").val("").text("--请选择城市--").appendTo($("#City"));
+            $("<option></option>").val("").text("--请选择区域--").appendTo($("#Area"));
+            $("<option></option>").val("").text("--请选择学校--").appendTo($("#SchoolId"));
+
+            $.getJSON("/BoxRunStat/GetCitys", { pid: $("#Prov").val() }, function (data) {
+                $.each(data, function (i, item) {
+                    $("<option></option>").val(item["Value"]).text(item["Text"]).appendTo($("#City"));
+                });
+            });
+        });
+
+        $("#City").change(function () {//加载区县
+            $("#Area").empty();
+            $("#BoxID").empty();
+            $("<option></option>").val("").text("--请选择区域--").appendTo($("#Area"));
+            $("<option></option>").val("").text("--请选择学校--").appendTo($("#SchoolId"));
+
+            $.getJSON("/BoxRunStat/GetAreas", { cid: $("#City").val() }, function (data) {
+                $.each(data, function (i, item) {
+                    $("<option></option>").val(item["Value"]).text(item["Text"]).appendTo($("#Area"));
+                });
+            });
+        });
+
+        $("#Area").change(function () {//加载学校
+            $("#BoxID").empty();
+            $("<option></option>").val("").text("--请选择学校--").appendTo($("#BoxID"));
+
+            $.getJSON("/BoxRunStat/GetSchool", { aid: $("#Area").val() }, function (data) {
+                $.each(data, function (i, item) {
+                    $("<option></option>").val(item["Value"]).text(item["Text"]).appendTo($("#BoxID"));
+                });
+            });
+        });
+
+        $("#export").click(function () {
+            $(this).attr('href', '/BoxStatistical/ExportData?SDate=' + $("#SDate").val() + '&EDate=' + $("#EDate").val() + '&Prov=' + $("#Prov").val() + '&City=' + $("#City").val() + '&Area=' + $("#Area").val() + '&BoxID=' + $("#BoxID").val() + '');
+        });
+    });
+    function s1() {
+        $("#City").empty();
+        $("#Area").empty();
+        $("<option></option>").val("").text("--请选择--").appendTo($("#City"));
+        $("<option></option>").val("").text("--请选择--").appendTo($("#Area"));
+    }
+
+    function s2() {
+        $("#Area").empty();
+        $("<option></option>").val("").text("--请选择--").appendTo($("#Area"));
+    }
+
+</script>

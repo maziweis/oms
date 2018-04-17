@@ -1,0 +1,41 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string _controller = ViewContext.RouteData.Values["controller"].ToString();
+    string _action = ViewContext.RouteData.Values["action"].ToString();
+    var page = BoxOms.Dict.Pages.Get(_controller, _action);
+    var navs = page == null ? new List<BoxOms.Dict.VM_NavLeft>() : BoxOms.Dict.NavLeft.Get(page.NavTopId);
+}
+
+<div class="row">
+    <div class="col-md-2">
+        @if (navs != null && navs.Count > 0)
+        {
+            <div class="list-group">
+                @foreach (var n in navs)
+                {
+                    if (page != null && page.NavLeftId == n.Id)
+                    {
+                        <a href="@n.Url" class="list-group-item active">@n.Name</a>
+                    }
+                    else
+                    {
+                        <a href="@n.Url" class="list-group-item">@n.Name</a>
+                    }
+                }
+            </div>
+        }
+    </div>
+
+    <div class="col-md-10">
+        @RenderBody()
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @RenderSection("scripts", required: false)
+}
+@section styles {
+    @RenderSection("styles", required: false)
+}

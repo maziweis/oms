@@ -1,0 +1,67 @@
+﻿@{
+    Layout = null;
+}
+
+@model VM_SyPassport_Login
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>运营管理系统</title>
+    <link href="@Url.Content("/Content/Tools/bootstrap/css/bootstrap.css")" rel="stylesheet" />
+    <style type="text/css">
+        .field-validation-error {
+            color: red;
+        }
+
+        .mycenter {
+            margin-top: 200px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mycenter">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title" style="font-family:'Microsoft YaHei'">运营管理系统</h3>
+            </div>
+            <div class="panel-body">
+                <div style="padding:20px;">
+                    @using (Html.BeginForm("Login", "SyPassport", FormMethod.Post, new { @id = "form1", @class = "form-horizontal" }))
+                    {
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                </div>
+                                @Html.TextBoxFor(m => m.Account, new { @class = "form-control", @placeholder = "用户名" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Account)
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="glyphicon glyphicon-lock"></i>
+                                </div>
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "密码" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Password)
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block btn-login">登录</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

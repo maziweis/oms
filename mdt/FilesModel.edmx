@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MOD_kingfiles_ZYC_BranchModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_Files">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="FileDescription" Type="nvarchar" MaxLength="200" />
+          <Property Name="FileExtension" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="FileSize" Type="int" Nullable="false" />
+          <Property Name="FilePath" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="FileType" Type="int" Nullable="false" />
+          <Property Name="FinishStatus" Type="bit" Nullable="false" />
+          <Property Name="EncryptStatus" Type="int" Nullable="false" />
+          <Property Name="ConvertStatus" Type="int" Nullable="false" />
+          <Property Name="UploadTime" Type="datetime" />
+          <Property Name="Width" Type="int" Nullable="false" />
+          <Property Name="Height" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="MOD_kingfiles_ZYC_BranchModelStoreContainer">
+          <EntitySet Name="tb_Files" EntityType="Self.tb_Files" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MOD_kingfiles_ZYC_BranchModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_Files">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="FileName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FileDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="FileExtension" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FileSize" Type="Int32" Nullable="false" />
+          <Property Name="FilePath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FileType" Type="Int32" Nullable="false" />
+          <Property Name="FinishStatus" Type="Boolean" Nullable="false" />
+          <Property Name="EncryptStatus" Type="Int32" Nullable="false" />
+          <Property Name="ConvertStatus" Type="Int32" Nullable="false" />
+          <Property Name="UploadTime" Type="DateTime" Precision="3" />
+          <Property Name="Width" Type="Int32" Nullable="false" />
+          <Property Name="Height" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="MOD_kingfiles_ZYC_BranchEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_Files" EntityType="Self.tb_Files" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MOD_kingfiles_ZYC_BranchModelStoreContainer" CdmEntityContainer="MOD_kingfiles_ZYC_BranchEntities">
+          <EntitySetMapping Name="tb_Files">
+            <EntityTypeMapping TypeName="MOD_kingfiles_ZYC_BranchModel.tb_Files">
+              <MappingFragment StoreEntitySet="tb_Files">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FileDescription" ColumnName="FileDescription" />
+                <ScalarProperty Name="FileExtension" ColumnName="FileExtension" />
+                <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="FileType" ColumnName="FileType" />
+                <ScalarProperty Name="FinishStatus" ColumnName="FinishStatus" />
+                <ScalarProperty Name="EncryptStatus" ColumnName="EncryptStatus" />
+                <ScalarProperty Name="ConvertStatus" ColumnName="ConvertStatus" />
+                <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

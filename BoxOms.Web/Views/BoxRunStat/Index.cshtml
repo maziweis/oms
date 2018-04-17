@@ -1,0 +1,45 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutTopLeft.cshtml";
+
+    Dictionary<double, string> dict = new Dictionary<double, string>();
+    dict.Add(1, "库存");
+    dict.Add(2, "已售");
+    dict.Add(3, "领用");
+}
+
+@model VM_BoxRunStat_Index
+
+<div class="panel panel-default">
+    <div class="panel-heading">商品列表</div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Index", "BoxRunStat", FormMethod.Get, new { @class = "form-inline", id = "form1" }))
+        {
+            @Html.HiddenFor(m => m.Grid.Pager.PageIndex)
+            @Html.HiddenFor(m => m.Grid.Pager.PageSize)
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.DropDownListFor(m => m.State, new SelectList(dict, "key", "value"), "--全部--", new { @class = "form-control", @onchange = "search()" })
+                    <div class="input-group" style="width: 26%;">
+                        @Html.TextBoxFor(m => m.key, new { @class = "form-control", @autocomplete = "off", @placeholder = "请输入：编号、学校、领用人员" })
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="search()">搜索</button>
+                        </span>
+                    </div>
+                    <a id="export" class="btn btn-default" href="#">导出Excel</a>
+                </div>
+            </div>
+            <div class="datas">
+                @Html.Partial("_IndexGrid", Model.Grid.Data)
+            </div>
+            @Html.Pager(Model.Grid.Pager)
+        }
+    </div>
+</div>
+<script src="@Url.Content("/Content/Tools/jquery/jquery-1.10.2.min.js")"></script>
+<script>
+    $(function () {
+        $("#export").click(function () {
+            $(this).attr('href', '/BoxRunStat/ExportData?state=' + $("#State").val() + '&key=' + $("#key").val() + '');
+        });
+    });
+</script>

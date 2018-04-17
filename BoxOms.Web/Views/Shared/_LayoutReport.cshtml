@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("/Content/Tools/bootstrap/css/bootstrap.css")" rel="stylesheet" />
+    <link href="@Url.Content("/Content/Styles/default/css/common.css")" rel="stylesheet" />
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    <div style="padding: 0 15px;">
+        @RenderBody()
+    </div>
+
+    <script src="@Url.Content("/Content/Tools/jquery/jquery-1.10.2.min.js")"></script>
+    <script src="@Url.Content("/Content/Tools/jquery/jquery.unobtrusive-ajax.min.js")"></script>
+    <script src="@Url.Content("/Content/Tools/bootstrap/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("/Content/Tools/My97DatePicker/WdatePicker.js")"></script>
+    <script src="@Url.Content("/Content/Tools/Msgbox/FzMsgbox.js")"></script>
+    <script src="@Url.Content("/Content/Js/common.js")"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

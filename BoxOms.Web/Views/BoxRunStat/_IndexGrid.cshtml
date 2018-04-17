@@ -1,0 +1,107 @@
+﻿@model List<VM_BoxRunStat_Index_Grid>
+<style type="text/css">
+    .table th, .table td {
+        text-align: center;
+        vertical-align: middle !important;
+        border: 1px solid #ccc;
+        vertical-align: middle;
+        padding: 10px;
+    }
+</style>
+<table class="table table-hover">
+    <tr align="center">
+        <th rowspan="2">盒子编号</th>
+        <th rowspan="2">状态</th>
+        <th rowspan="2">省/直辖市</th>
+        <th rowspan="2">领用人员</th>
+        <th rowspan="2">学校名称</th>
+        <th rowspan="2">首次回执时间</th>
+        <th colspan="3">版本</th>
+        <th rowspan="2">操作</th>
+    </tr>
+    <tr>
+        <th>英语</th>
+        <th>数学</th>
+        <th>语文</th>
+    </tr>
+    @if (Model.Count > 0)
+    {
+        foreach (var item in Model)
+        {
+            //string _tiem = item.RunTime == null ? "" : ((DateTime)item.RunTime).ToString("yyyy-MM-dd HH:mm:ss");
+            string _state = string.Empty;
+            switch (item.State)
+            {
+                case 1:
+                    _state = "库存";
+                    break;
+                case 2:
+                    _state = "已售";
+                    break;
+                case 3:
+                    _state = "领用";
+                    break;
+            }
+            <tr>
+                <td>@item.BoxId</td>
+                <td>@_state</td>
+                <td>@item.Prov</td>
+                <td>@item.UseUserName</td>
+                <td>@item.SchoolName</td>
+                <td>@item.FirstRunTime</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.English))
+                    {
+                        var _data = item.English.Split(',');
+                        for (int i = 0; i < _data.Length; i++)
+                        {
+                            if (string.IsNullOrWhiteSpace(_data[i]))
+                            {
+                                continue;
+                            }
+
+                            <span class="label label-info">@_data[i].ToString()</span>
+                        }
+                    }
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.Math))
+                    {
+                        var _data = item.Math.Split(',');
+                        for (int i = 0; i < _data.Length; i++)
+                        {
+                            if (string.IsNullOrWhiteSpace(_data[i]))
+                            {
+                                continue;
+                            }
+
+                            <span class="label label-info">@_data[i].ToString()</span>
+                        }
+                    }
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.Chinese))
+                    {
+                        var _data = item.Chinese.Split(',');
+                        for (int i = 0; i < _data.Length; i++)
+                        {
+                            if (string.IsNullOrWhiteSpace(_data[i]))
+                            {
+                                continue;
+                            }
+
+                            <span class="label label-info">@_data[i].ToString()</span>
+                        }
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-default btn-sm" href="@Url.Action("Edit", new { id = item.BoxId })" title="编辑" data-toggle="modal" data-target="#myModal" data-backdrop="static"><i class="glyphicon glyphicon-edit"></i></a>
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr><td class="nodata" colspan="10">目前没有任何数据</td></tr>
+    }
+</table>

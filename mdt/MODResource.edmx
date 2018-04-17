@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MOD_Resource_BranchModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_Resource">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Number" Type="float" />
+          <Property Name="Title" Type="nvarchar" MaxLength="500" />
+          <Property Name="SchoolStage" Type="int" />
+          <Property Name="Grade" Type="int" />
+          <Property Name="Subject" Type="int" />
+          <Property Name="Edition" Type="int" />
+          <Property Name="BookReel" Type="int" />
+          <Property Name="Catalog" Type="int" />
+          <Property Name="ResourceType" Type="int" />
+          <Property Name="ResourceStyle" Type="int" />
+          <Property Name="ResourceLevel" Type="int" />
+          <Property Name="KeyWords" Type="nvarchar" MaxLength="1000" />
+          <Property Name="TeachingStep" Type="int" />
+          <Property Name="TeachingStyle" Type="int" />
+          <Property Name="FileID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="IsVerify" Type="int" />
+          <Property Name="Purview" Type="int" />
+          <Property Name="UploadDate" Type="datetime" />
+          <Property Name="UploadUser" Type="varchar" MaxLength="30" />
+          <Property Name="IsDelete" Type="int" />
+          <Property Name="DownCounts" Type="int" />
+          <Property Name="ScanCounts" Type="int" />
+          <Property Name="FileType" Type="nvarchar" MaxLength="10" />
+          <Property Name="BreviaryImgUrl" Type="nvarchar" MaxLength="500" />
+          <Property Name="ResourceSize" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="IsRecommend" Type="int" />
+          <Property Name="MaterialID" Type="uniqueidentifier" />
+          <Property Name="ComeFrom" Type="nvarchar" MaxLength="50" />
+          <Property Name="AppraisedCounts" Type="int" />
+          <Property Name="CollectCounts" Type="int" />
+          <Property Name="TeachingModules" Type="nvarchar" MaxLength="50" />
+          <Property Name="Applicable" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifyDate" Type="datetime" />
+          <Property Name="Copyright" Type="int" />
+          <Property Name="CopyrightName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sort" Type="bigint" Nullable="false" />
+          <Property Name="TimeSpan" Type="int" />
+          <Property Name="ResourceClass" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_TextBook">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClssId" Type="int" />
+          <Property Name="ClssName" Type="nvarchar" MaxLength="50" />
+          <Property Name="TextBookPath" Type="varchar" MaxLength="50" />
+          <Property Name="ThumbnailsPath" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="MOD_Resource_BranchModelStoreContainer">
+          <EntitySet Name="tb_Resource" EntityType="Self.tb_Resource" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_TextBook" EntityType="Self.tb_TextBook" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MOD_Resource_BranchModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_TextBook">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClssId" Type="Int32" />
+          <Property Name="ClssName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TextBookPath" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ThumbnailsPath" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="MOD_Resource_BranchEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_TextBook" EntityType="Self.tb_TextBook" />
+          <EntitySet Name="tb_Resource" EntityType="MOD_Resource_BranchModel.tb_Resource" />
+        </EntityContainer>
+        <EntityType Name="tb_Resource">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Number" Type="Double" />
+          <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SchoolStage" Type="Int32" />
+          <Property Name="Grade" Type="Int32" />
+          <Property Name="Subject" Type="Int32" />
+          <Property Name="Edition" Type="Int32" />
+          <Property Name="BookReel" Type="Int32" />
+          <Property Name="Catalog" Type="Int32" />
+          <Property Name="ResourceType" Type="Int32" />
+          <Property Name="ResourceStyle" Type="Int32" />
+          <Property Name="ResourceLevel" Type="Int32" />
+          <Property Name="KeyWords" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="TeachingStep" Type="Int32" />
+          <Property Name="TeachingStyle" Type="Int32" />
+          <Property Name="FileID" Type="Guid" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="IsVerify" Type="Int32" />
+          <Property Name="Purview" Type="Int32" />
+          <Property Name="UploadDate" Type="DateTime" Precision="3" />
+          <Property Name="UploadUser" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="IsDelete" Type="Int32" />
+          <Property Name="DownCounts" Type="Int32" />
+          <Property Name="ScanCounts" Type="Int32" />
+          <Property Name="FileType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="BreviaryImgUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceSize" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IsRecommend" Type="Int32" />
+          <Property Name="MaterialID" Type="Guid" />
+          <Property Name="ComeFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AppraisedCounts" Type="Int32" />
+          <Property Name="CollectCounts" Type="Int32" />
+          <Property Name="TeachingModules" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Applicable" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <Property Name="Copyright" Type="Int32" />
+          <Property Name="CopyrightName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sort" Type="Int64" Nullable="false" />
+          <Property Name="TimeSpan" Type="Int32" />
+          <Property Name="ResourceClass" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MOD_Resource_BranchModelStoreContainer" CdmEntityContainer="MOD_Resource_BranchEntities">
+          <EntitySetMapping Name="tb_TextBook">
+            <EntityTypeMapping TypeName="MOD_Resource_BranchModel.tb_TextBook">
+              <MappingFragment StoreEntitySet="tb_TextBook">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClssId" ColumnName="ClssId" />
+                <ScalarProperty Name="ClssName" ColumnName="ClssName" />
+                <ScalarProperty Name="TextBookPath" ColumnName="TextBookPath" />
+                <ScalarProperty Name="ThumbnailsPath" ColumnName="ThumbnailsPath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Resource">
+            <EntityTypeMapping TypeName="MOD_Resource_BranchModel.tb_Resource">
+              <MappingFragment StoreEntitySet="tb_Resource">
+                <ScalarProperty Name="ResourceClass" ColumnName="ResourceClass" />
+                <ScalarProperty Name="TimeSpan" ColumnName="TimeSpan" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="CopyrightName" ColumnName="CopyrightName" />
+                <ScalarProperty Name="Copyright" ColumnName="Copyright" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="Applicable" ColumnName="Applicable" />
+                <ScalarProperty Name="TeachingModules" ColumnName="TeachingModules" />
+                <ScalarProperty Name="CollectCounts" ColumnName="CollectCounts" />
+                <ScalarProperty Name="AppraisedCounts" ColumnName="AppraisedCounts" />
+                <ScalarProperty Name="ComeFrom" ColumnName="ComeFrom" />
+                <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+                <ScalarProperty Name="IsRecommend" ColumnName="IsRecommend" />
+                <ScalarProperty Name="ResourceSize" ColumnName="ResourceSize" />
+                <ScalarProperty Name="BreviaryImgUrl" ColumnName="BreviaryImgUrl" />
+                <ScalarProperty Name="FileType" ColumnName="FileType" />
+                <ScalarProperty Name="ScanCounts" ColumnName="ScanCounts" />
+                <ScalarProperty Name="DownCounts" ColumnName="DownCounts" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="UploadUser" ColumnName="UploadUser" />
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="Purview" ColumnName="Purview" />
+                <ScalarProperty Name="IsVerify" ColumnName="IsVerify" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+                <ScalarProperty Name="TeachingStyle" ColumnName="TeachingStyle" />
+                <ScalarProperty Name="TeachingStep" ColumnName="TeachingStep" />
+                <ScalarProperty Name="KeyWords" ColumnName="KeyWords" />
+                <ScalarProperty Name="ResourceLevel" ColumnName="ResourceLevel" />
+                <ScalarProperty Name="ResourceStyle" ColumnName="ResourceStyle" />
+                <ScalarProperty Name="ResourceType" ColumnName="ResourceType" />
+                <ScalarProperty Name="Catalog" ColumnName="Catalog" />
+                <ScalarProperty Name="BookReel" ColumnName="BookReel" />
+                <ScalarProperty Name="Edition" ColumnName="Edition" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="SchoolStage" ColumnName="SchoolStage" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

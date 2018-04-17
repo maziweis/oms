@@ -1,0 +1,108 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutTopLeft.cshtml";
+    List<BoxOms.Dict.VM_NavTop> _listTop = BoxOms.Dict.NavTop.Get();
+    string[] _ids = null;
+    if (!string.IsNullOrEmpty(Model.ids))
+    {
+        _ids = Model.ids.Split(',');
+    }
+}
+
+@model VM_SyRole_Form
+@using (Html.BeginForm("Edit", "SyRole", FormMethod.Post, new { @class = "form-horizontal", id = "form1", enctype = "multipart/form-data" }))
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">基本信息</div>
+        <div class="panel-body">
+
+            @Html.HiddenFor(m => m.ids)
+            @Html.HiddenFor(m => m.RoleId)
+            <div style="width:600px;">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.RoleName, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(m => m.RoleName, new { @class = "form-control", @autocomplete = "off" })
+                        @Html.ValidationMessageFor(m => m.RoleName)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Remark, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextAreaFor(m => m.Remark, 5, 5, new { @class = "form-control" })
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">角色权限</div>
+
+        <div class="panel-body">
+            @if (_listTop.Count > 0)
+            {
+                foreach (var item in _listTop)
+                {
+                    List<BoxOms.Dict.VM_NavLeft> _listLeft = BoxOms.Dict.NavLeft.Get(item.Id);
+                    if (_listLeft.Count > 0)
+                    {
+                        <div style="width:600px;">
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">@item.Name</label>
+                                <div class="col-lg-10" style="padding-top: 7px;">
+                                    @foreach (var it in _listLeft)
+                            {
+                                string _checked = string.Empty;
+                                if (_ids != null)
+                                {
+                                    for (int i = 0; i < _ids.Length; i++)
+                                    {
+                                        if (_ids[i] == it.Id.ToString())
+                                        {
+                                            _checked = "checked=checked";
+                                            break;
+                                        }
+                                    }
+                                }
+                                <input type="checkbox" value="@it.Id" @_checked />@it.Name<span>&nbsp;&nbsp;&nbsp;</span>
+
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-lg-offset-2 col-lg-10">
+            <button type="submit" class="btn btn-primary">确定</button>
+            <a href="@Url.Action("Index","SyRole")" class="btn btn-primary">返回</a>
+        </div>
+    </div>
+}
+
+<script src=@Url.Content("~/Content/Tools/jquery/jquery-1.10.2.min.js")></script>
+<script type="text/javascript">
+    $(function () {
+        $("input:checkbox").change(function () {
+            var _ids = $("#ids").val();
+            if ($(this).is(':checked')) {
+                $("#ids").val($(this).val() + "," + _ids)
+            } else {
+                var b = "";
+                var arr = new Array();
+                arr = _ids.split(',');
+                arr.splice($.inArray($(this).val(), arr), 1);
+                for (var i = 0; i < arr.length; i++) {
+                    b = arr[i] + "," + b;
+                }
+                $("#ids").val(b)
+            }
+
+        })
+    });
+</script>

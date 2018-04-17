@@ -1,0 +1,83 @@
+﻿@{
+    VM_SyPassport_UserInfo userInfo = HttpContext.Current.Session["UserInfo"] as VM_SyPassport_UserInfo;
+    if (userInfo != null)
+    {
+        ViewBag.UserName = userInfo.Name;
+    }
+
+    string _controller = ViewContext.RouteData.Values["controller"].ToString();
+    string _action = ViewContext.RouteData.Values["action"].ToString();
+    var page = BoxOms.Dict.Pages.Get(_controller, _action);
+    var navs = BoxOms.Dict.NavTop.Get();
+}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>运营管理系统</title>
+    <link href="@Url.Content("/Content/Tools/bootstrap/css/bootstrap.css")" rel="stylesheet" />
+    <link href="@Url.Content("/Content/Styles/default/css/common.css")" rel="stylesheet" />
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <span class="navbar-brand" style="padding-right:50px;">运营管理系统</span>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                @if (navs != null && navs.Count > 0)
+                {
+                    <ul class="nav navbar-nav">
+                        @foreach (var n in navs)
+                        {
+                            if (page != null && page.NavTopId == n.Id)
+                            {
+                                <li class="active"><a href="@n.Url"><i class="@n.Icon">&nbsp;</i>@n.Name</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="@n.Url"><i class="@n.Icon">&nbsp;</i>@n.Name</a></li>
+                            }
+                        }
+                    </ul>
+                }
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-user">&nbsp;</i>@ViewBag.UserName <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("ChangePassword","SyPassport")" data-toggle="modal" data-target="#myModal" data-backdrop="static"><i class="glyphicon glyphicon-edit">&nbsp;</i>修改密码</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#" onclick="exit()"><i class="glyphicon glyphicon-off">&nbsp;</i>退出系统</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <div style="padding: 0 15px;">
+        @RenderBody()
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width:650px;"></div>
+        </div>
+    </div>
+
+    <script src="@Url.Content("/Content/Tools/jquery/jquery-1.10.2.min.js")"></script>
+    <script src="@Url.Content("/Content/Tools/jquery/jquery.unobtrusive-ajax.min.js")"></script>
+    <script src="@Url.Content("/Content/Tools/bootstrap/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("/Content/Tools/My97DatePicker/WdatePicker.js")"></script>
+    <script src="@Url.Content("/Content/Tools/Msgbox/FzMsgbox.js")"></script>
+    <script src="@Url.Content("/Content/Js/common.js")"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

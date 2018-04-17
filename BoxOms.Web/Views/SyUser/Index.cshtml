@@ -1,0 +1,37 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutTopLeft.cshtml";
+    ViewBag.States = BoxOms.Dict.State.Get();
+}
+
+@model VM_SyUser_Index
+
+<div class="panel panel-default">
+    <div class="panel-heading">用户列表</div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Index", "SyUser", FormMethod.Get, new { @class = "form-inline", id = "form1" }))
+        {
+            @Html.HiddenFor(m => m.Grid.Pager.PageIndex)
+            @Html.HiddenFor(m => m.Grid.Pager.PageSize)
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.DropDownListFor(m => m.State, new SelectList(ViewBag.States, "key", "value"), "--全部状态--", new { @class = "form-control", @onchange = "search()" })
+                    <div class="input-group">
+                        @Html.TextBoxFor(m => m.Key, new { @class = "form-control", @autocomplete = "off", @placeholder = "请输入：帐号、姓名" })
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="search()">搜索</button>
+                        </span>
+                    </div>
+                    <a class="btn btn-default" href="@Url.Action("Add")" role="button" data-toggle="modal" data-target="#myModal" data-backdrop="static">新增</a>
+                </div>
+            </div>
+        }
+        <div class="datas">
+            @Html.Partial("_IndexGrid", Model.Grid.Data)
+        </div>
+        @Html.Pager(Model.Grid.Pager)
+    </div>
+</div>
+
+@section Scripts {
+    <script src="@Url.Content("/Content/Js/SyUser.js")"></script>
+}

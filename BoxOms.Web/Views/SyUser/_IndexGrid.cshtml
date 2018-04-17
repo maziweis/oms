@@ -1,0 +1,55 @@
+﻿@model List<VM_SyUser_Index_Grid>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>帐号</th>
+            <th>姓名</th>
+            <th>角色</th>
+            <th>状态</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+                string _roleName = BoxOms.Web.BLL.SyRoleBLL.BackRoleName(item.Id);
+                <tr>
+                    <td>@item.Account</td>
+                    <td>@item.Name</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(_roleName))
+                        {
+                            var _data = _roleName.TrimEnd(',').Split(',');
+                            for (int i = 0; i < _data.Length; i++)
+                            {
+                                <span class="label label-info">@_data[i].ToString()</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @switch (item.State)
+                        {
+                            case 0:
+                                <span class="label label-success">正常</span>
+                                break;
+                            case 1:
+                                <span class="label label-danger">停用</span>
+                                break;
+                        }
+                    </td>
+                    <td>
+                        <button class="btn btn-default btn-sm btnResetPwd" type="button" title="重置密码" dataid="@item.Id"><i class="glyphicon glyphicon-repeat"></i></button>
+                        <a class="btn btn-default btn-sm" href="@Url.Action("Edit", new { id = item.Id })" title="编辑" data-toggle="modal" data-target="#myModal" data-backdrop="static"><i class="glyphicon glyphicon-edit"></i></a>
+                        <button class="btn btn-default btn-sm btnDelete" type="button" title="删除" dataid="@item.Id"><i class="glyphicon glyphicon-trash"></i></button>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td class="nodata" colspan="4">目前没有任何数据</td></tr>
+        }
+    </tbody>
+</table>
